@@ -40,7 +40,8 @@ div#site-nav.site-title-links
                 a(href="http://weibo.com/u/" + theme.weibo, target="_blank", rel="noopener noreferrer", aria-label="Sina Weibo")
                     i.fa.fa-weibo &nbsp;
             if theme.rss
-                a(href=config.url + "/" + theme.rss, target="_blank", rel="noopener noreferrer", aria-label="RSS")
+                - var rssBase = config.url ? config.url.toLowerCase() : config.url
+                a(href=rssBase + "/" + theme.rss, target="_blank", rel="noopener noreferrer", aria-label="RSS")
                     i.fa.fa-rss &nbsp;
     div.visible-lg.visible-md.visible-sm.site-nav-footer
         br.site-nav-footer-br

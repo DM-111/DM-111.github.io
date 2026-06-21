@@ -11,8 +11,7 @@ language: en
 timezone: Asia/Shanghai
 
 # URL
-# Replace lastdeng if gh auth later reports a different GitHub login.
-url: https://lastdeng.github.io
+url: https://dm-111.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

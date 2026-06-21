@@ -1,9 +1,10 @@
 footer
     - var currYear = new Date().getYear() + 1900;
+    - var siteUrl = config.url ? config.url.toLowerCase() : config.url;
     p &copy;&nbsp;
         !=currYear
         | &nbsp;
-        a(target="_blank", href=config.url,  rel="noopener noreferrer")!=theme.author ? theme.author : config.author ? config.author : config.title
+        a(target="_blank", href=siteUrl,  rel="noopener noreferrer")!=theme.author ? theme.author : config.author ? config.author : config.title
     p Theme&nbsp;
         a(target="_blank", href="https://github.com/SumiMakito/hexo-theme-typography", rel="noopener noreferrer") Typography
         | &nbsp;by&nbsp;
