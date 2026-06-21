@@ -1,0 +1,21 @@
+title_primary: "保持思考｜平衡｜阅读"
+title_secondary: "DM's blog"
+keywords: What are you thinking about?
+author: DM
+
+twitter:
+rss: atom.xml
+weibo:
+instagram:
+github: lastdeng
+
+# Leave comment services blank by default. Configure your own Gitalk/Giscus later.
+livere:
+disqus:
+dove:
+
+showPageCount: true
+showCategories: false
+showTags: false
+
+themeStyle: light

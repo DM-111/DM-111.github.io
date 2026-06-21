@@ -1,0 +1,113 @@
+# Hexo Configuration
+# Docs: https://hexo.io/docs/configuration.html
+
+# Site
+title: 保持思考、等待、斋戒
+subtitle: ''
+description: A Blog Powered By Hexo
+keywords: What are you thinking about?
+author: DM
+language: en
+timezone: Asia/Shanghai
+
+# URL
+# Replace lastdeng if gh auth later reports a different GitHub login.
+url: https://lastdeng.github.io
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+  - slides/**/*.html
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+relative_link: false
+future: true
+syntax_highlighter: prismjs
+
+highlight:
+  enable: false
+
+prismjs:
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+prism_plugin:
+  mode: preprocess
+  theme: default
+  line_number: true
+
+# Home page setting
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Archive, category, tag and feed generators
+archive_generator:
+  per_page: 0
+
+category_generator:
+  per_page: 10
+  enable_index_page: true
+
+tag_generator:
+  per_page: 10
+  enable_index_page: true
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  content_limit: 140
+  content_limit_delim: ' '
+
+# Metadata elements
+meta_generator: true
+
+# Date / Time format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: mtime
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Include / Exclude file(s)
+include:
+exclude:
+ignore:
+
+# Extensions
+theme: typography
+
+# Deployment
+deploy:
+  type: ''
