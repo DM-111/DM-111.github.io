@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>IPA 完整课程 · 美式英语音标</title>
+<meta name="description" content="七天美式英语 IPA 音标课程：真人发音、页内播放、清晰讲解。" />
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-elevated: #fffcf8;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --ink-soft: #44403c;
+  --muted: #78716c;
+  --faint: #a8a29e;
+  --border: #e8e4dc;
+  --border-strong: #d6d0c4;
+  --accent: #b45309;
+  --accent-deep: #9a3412;
+  --accent-soft: #fff7ed;
+  --accent-ring: rgba(180, 83, 9, 0.22);
+  --success: #3f6212;
+  --success-soft: #f3f8e8;
+  --danger: #b91c1c;
+  --danger-soft: #fef2f2;
+  --shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.04);
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
+  --radius: 16px;
+  --radius-sm: 12px;
+  --sidebar-w: 268px;
+  --font: "Inter", "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-ipa: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Songti SC", serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, select { font: inherit; }
+a { color: var(--accent-deep); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.app { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  padding: 28px 18px 32px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 30;
+}
+.brand {
+  padding: 0 10px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.brand-kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+  font-weight: 650;
+  color: var(--ink);
+}
+.brand p {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink-soft);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: background .18s var(--ease), border-color .18s, color .18s, box-shadow .18s;
+}
+.nav-btn:hover { background: rgba(255,255,255,.7); color: var(--ink); }
+.nav-btn.active {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+.nav-btn .num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.72rem;
+  font-weight: 650;
+  background: #efeae2;
+  color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.nav-btn.active .num,
+.nav-btn.done .num {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.nav-btn.done .num::after { content: none; }
+.nav-btn .label { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nav-btn .label strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.nav-btn .label span {
+  font-size: 0.75rem;
+  color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-btn.active .label span { color: var(--muted); }
+
+.progress-wrap {
+  margin: 20px 10px 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.progress-wrap .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.progress-wrap .row b { color: var(--ink); font-weight: 600; }
+.bar {
+  height: 4px;
+  background: #efeae2;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width .35s var(--ease);
+}
+
+.sidebar-note {
+  margin: 16px 10px 0;
+  font-size: 0.75rem;
+  color: var(--faint);
+  line-height: 1.45;
+}
+
+/* Mobile */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 50;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 9px 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(28, 25, 23, .28);
+  z-index: 25;
+  backdrop-filter: blur(2px);
+}
+
+/* Main */
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 36px 40px 96px;
+  max-width: 880px;
+}
+.day-chips {
+  display: none;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  margin: 0 0 8px;
+  -webkit-overflow-scrolling: touch;
+}
+.day-chips button {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: .18s var(--ease);
+}
+.day-chips button.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hero h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.05rem);
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.hero .sub {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 52ch;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  align-items: center;
+}
+.btn {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 550;
+  transition: transform .12s, background .18s, border-color .18s, box-shadow .18s;
+  box-shadow: var(--shadow-sm);
+}
+.btn:hover { background: var(--bg-elevated); }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.btn.primary:hover { background: #292524; }
+.btn.ghost {
+  box-shadow: none;
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+}
+.btn.ghost:hover { color: var(--ink); background: rgba(255,255,255,.5); }
+
+.tip-banner {
+  background: var(--accent-soft);
+  border: 1px solid #fed7aa;
+  color: var(--accent-deep);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+/* Symbol card */
+.symbol {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 26px 22px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.symbol-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.symbol-ipa {
+  font-family: var(--font-ipa);
+  font-size: clamp(2.2rem, 4vw, 2.85rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--ink);
+  margin: 0;
+}
+.symbol-name {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-weight: 550;
+}
+.ame-pill {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border: 1px solid #fed7aa;
+  border-radius: 999px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  margin-top: 6px;
+}
+.symbol-tip {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+.words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.word-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 8px 6px 14px;
+  transition: border-color .18s, background .18s, box-shadow .18s;
+  max-width: 100%;
+}
+.word-chip:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-elevated);
+}
+.word-chip.playing {
+  border-color: #fdba74;
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+.word-meta { min-width: 0; display: flex; flex-direction: column; gap: 0; line-height: 1.25; padding: 2px 0; }
+.word-meta .w {
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.word-meta .ipa {
+  font-family: var(--font-ipa);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.play {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform .12s, background .18s;
+  padding: 0;
+}
+.play:hover { background: var(--accent-deep); }
+.play:active { transform: scale(0.94); }
+.play svg { width: 14px; height: 14px; display: block; }
+.play .wave {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.play .wave i {
+  width: 2px;
+  background: #fff;
+  border-radius: 1px;
+  animation: wave 0.8s ease-in-out infinite;
+}
+.play .wave i:nth-child(1) { height: 5px; animation-delay: 0s; }
+.play .wave i:nth-child(2) { height: 10px; animation-delay: .15s; }
+.play .wave i:nth-child(3) { height: 7px; animation-delay: .3s; }
+.word-chip.playing .play .icon-play { display: none; }
+.word-chip.playing .play .wave { display: inline-flex; }
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.55); }
+  50% { transform: scaleY(1); }
+}
+
+.pair-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 10px 6px 14px;
+}
+.pair-chip .sep { color: var(--faint); font-size: 0.85rem; padding: 0 2px; }
+.pair-chip .part {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.pair-chip .part .w { font-weight: 600; font-size: 0.92rem; }
+.pair-chip .play { width: 30px; height: 30px; }
+.pair-chip .play svg { width: 12px; height: 12px; }
+.pair-chip.playing,
+.pair-chip.playing-a,
+.pair-chip.playing-b {
+  border-color: #fdba74;
+  background: var(--accent-soft);
+}
+
+.dict-link {
+  display: inline-block;
+  margin-left: 2px;
+  font-size: 0.72rem;
+  color: var(--faint);
+  text-decoration: none;
+}
+.dict-link:hover { color: var(--accent); text-decoration: underline; }
+
+/* Intro / panels */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.panel h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+.panel p { margin: 0 0 10px; color: var(--muted); }
+.panel ul { margin: 8px 0 0; padding-left: 1.15em; color: var(--muted); }
+.panel li { margin-bottom: 6px; }
+.goals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.goals div {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+.goals strong { display: block; color: var(--ink); margin-bottom: 2px; font-size: 0.82rem; }
+
+/* Quiz */
+.quiz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.quiz-card .q-num {
+  font-size: 0.75rem;
+  color: var(--faint);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.quiz-card .prompt {
+  font-size: 1.02rem;
+  font-weight: 550;
+  margin: 0 0 14px;
+  letter-spacing: -0.015em;
+}
+.quiz-listen {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.options {
+  display: grid;
+  gap: 8px;
+}
+.opt {
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  color: var(--ink);
+  transition: .15s var(--ease);
+  font-family: var(--font-ipa);
+  font-size: 1rem;
+}
+.opt:hover:not(:disabled) { border-color: var(--border-strong); background: var(--bg-elevated); }
+.opt.correct {
+  background: var(--success-soft);
+  border-color: #a3b86c;
+  color: var(--success);
+}
+.opt.wrong {
+  background: var(--danger-soft);
+  border-color: #fca5a5;
+  color: var(--danger);
+}
+.opt:disabled { cursor: default; }
+.quiz-score {
+  margin-top: 8px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.quiz-score b { color: var(--ink); }
+
+.section-label {
+  margin: 28px 0 12px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 650;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.mark-done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.mark-done input { accent-color: var(--accent); width: 16px; height: 16px; }
+
+.hidden { display: none !important; }
+
+@media (max-width: 860px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    transform: translateX(-105%);
+    transition: transform .28s var(--ease);
+    box-shadow: var(--shadow);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .menu-toggle { display: inline-flex; }
+  .overlay.show { display: block; }
+  .main { padding: 64px 18px 80px; }
+  .day-chips { display: flex; }
+  .symbol { padding: 20px 18px 18px; }
+  .symbol-head { flex-direction: column; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" aria-label="打开目录">目录</button>
+<div class="overlay" id="overlay"></div>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <p class="brand-kicker">American English</p>
+      <h1>IPA 完整课程</h1>
+      <p>七天掌握美式音标<br>真人发音 · 页内播放</p>
+    </div>
+    <nav id="nav"></nav>
+    <div class="progress-wrap">
+      <div class="row"><span>学习进度</span><b id="progressText">0 / 7</b></div>
+      <div class="bar"><i id="progressBar"></i></div>
+    </div>
+    <p class="sidebar-note">音频已打包在本地，点击播放即可听到真人发音，无需跳转页面。</p>
+  </aside>
+
+  <main class="main">
+    <div class="day-chips" id="dayChips"></div>
+    <div id="view"></div>
+  </main>
+</div>
+
+<audio id="player" preload="none"></audio>
+
+<script>
+const DAYS = {"day1":{"title":"Day 1 · 短/长前元音","subtitle":"Short & long front vowels — /ɪ/ /iː/ /e/ /æ/","symbols":[{"ipa":"/ɪ/","name":"短 i · kit","tip":"口型略扁、下巴放松，比中文「衣」更短更松。常见错误：拉长成 /iː/（把 bit 念成 beat）。","words":[{"w":"bit","ipa":"/bɪt/"},{"w":"system","ipa":"/ˈsɪstəm/"},{"w":"build","ipa":"/bɪld/"},{"w":"git","ipa":"/ɡɪt/"},{"w":"list","ipa":"/lɪst/"},{"w":"fix","ipa":"/ˈɪndeks/"}]},{"ipa":"/iː/","name":"长 ee · fleece","tip":"嘴角向两侧拉开，舌位更高更前，音要拉长。中文「衣」接近，但英语更紧、更长。","words":[{"w":"see","ipa":"/siː/"},{"w":"key","ipa":"/kiː/"},{"w":"team","ipa":"/tiːm/"},{"w":"lease","ipa":"/liːs/"},{"w":"email","ipa":"/ˈiːmeɪl/"},{"w":"read","ipa":"/riːd/"}]},{"ipa":"/e/","name":"短 e · dress（AmE 常写作 /ɛ/）","tip":"中等开口，像微笑一半。勿与 /æ/ 混淆（bed ≠ bad）。美式词典常标 /ɛ/，同一音。","ame":"AmE 常标 /ɛ/","words":[{"w":"bed","ipa":"/bed/"},{"w":"get","ipa":"/ɡet/"},{"w":"check","ipa":"/tʃek/"},{"w":"error","ipa":"/ˈerər/"},{"w":"message","ipa":"/ˈmesɪdʒ/"},{"w":"next","ipa":"/nekst/"}]},{"ipa":"/æ/","name":"短 a · trap","tip":"嘴张大、舌压低靠前，像被吓到的「啊」但更扁。中国人常把 cache /kæʃ/ 念成 /keɪʃ/。","words":[{"w":"cat","ipa":"/kæt/"},{"w":"cache","ipa":"/kæʃ/"},{"w":"app","ipa":"/æp/"},{"w":"stack","ipa":"/stæk/"},{"w":"badge","ipa":"/bædʒ/"},{"w":"access","ipa":"/ˈækses/"}]}],"quiz":[{"type":"pick-ipa","prompt":"听：cache。选正确音标：","speak":"cache","options":["/kæʃ/","/keɪʃ/","/kɑːʃ/","/kɜːʃ/"],"answer":0},{"type":"pick-word","prompt":"哪个词含有 /ɪ/（短 i）？","options":["team","bit","cache","see"],"answer":1},{"type":"pick-ipa","prompt":"听：system。选正确音标：","speak":"system","options":["/ˈsiːstəm/","/ˈsɪstəm/","/ˈsæstəm/","/ˈsestəm/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /æ/？","options":["check","key","stack","list"],"answer":2},{"type":"pick-ipa","prompt":"听：beat（对比 bit）。选 beat 的音标：","speak":"beat","options":["/bɪt/","/biːt/","/bet/","/bæt/"],"answer":1}]},"day2":{"title":"Day 2 · 后元音与中元音","subtitle":"Back & central vowels — /ʌ/ /ɑː/ /ɒ/ /ɔː/ /ʊ/ /uː/ /ə/ /ɜː/","symbols":[{"ipa":"/ʌ/","name":"短 u · strut","tip":"中性短音，嘴半开、舌中央。勿念成中文「啊」或「喔」。bug /bʌɡ/ 不是 /bɑːɡ/。","words":[{"w":"but","ipa":"/bʌt/"},{"w":"bug","ipa":"/bʌɡ/"},{"w":"update","ipa":"/ˈʌpdeɪt/"},{"w":"run","ipa":"/rʌn/"},{"w":"function","ipa":"/ˈfʌŋkʃən/"},{"w":"button","ipa":"/ˈbʌtn/"}]},{"ipa":"/ɑː/","name":"长 ah · father / start","tip":"嘴大开、舌靠后，像医生让你说「啊」并拉长。美式 car、father 都用此音。","words":[{"w":"father","ipa":"/ˈfɑːðər/"},{"w":"car","ipa":"/kɑːr/"},{"w":"start","ipa":"/stɑːrt/"},{"w":"hard","ipa":"/hɑːrd/"},{"w":"farm","ipa":"/fɑːrm/"},{"w":"calm","ipa":"/kɑːm/"}]},{"ipa":"/ɒ/","name":"短 o · lot（主要为 BrE）","tip":"英式「短 o」，圆唇、开口。美式 lot/hot 多念成 /ɑː/。词典若标 /ɒ/，美音可听成 /ɑː/。","ame":"AmE 多读作 /ɑː/","words":[{"w":"hot","ipa":"/hɒt/ → AmE /hɑːt/"},{"w":"lot","ipa":"/lɒt/ → AmE /lɑːt/"},{"w":"want","ipa":"/wɒnt/ → AmE /wɑːnt/"},{"w":"process","ipa":"/ˈprɒses/ → AmE /ˈprɑːses/"},{"w":"docker","ipa":"/ˈdɒkər/ → AmE /ˈdɑːkər/"},{"w":"option","ipa":"/ˈɒpʃən/ → AmE /ˈɑːpʃən/"}]},{"ipa":"/ɔː/","name":"长 aw · thought / north","tip":"圆唇、开口中等偏大并拉长。美式部分地区与 /ɑː/ 合并（cot–caught merger）。","words":[{"w":"call","ipa":"/kɔːl/"},{"w":"law","ipa":"/lɔː/"},{"w":"source","ipa":"/sɔːrs/"},{"w":"auth","ipa":"/ɔːθ/"},{"w":"more","ipa":"/mɔːr/"},{"w":"port","ipa":"/pɔːrt/"}]},{"ipa":"/ʊ/","name":"短 oo · foot","tip":"嘴唇略圆、音短松。勿拉长成 /uː/（full ≠ fool）。push、put、book 都是此音。","words":[{"w":"put","ipa":"/pʊt/"},{"w":"book","ipa":"/bʊk/"},{"w":"look","ipa":"/lʊk/"},{"w":"push","ipa":"/pʊʃ/"},{"w":"full","ipa":"/fʊl/"},{"w":"cookie","ipa":"/ˈkʊki/"}]},{"ipa":"/uː/","name":"长 oo · goose","tip":"嘴唇收圆前突，音拉长。tool、true、group 都是此音。queue = /kjuː/（含 /j/）。","words":[{"w":"too","ipa":"/tuː/"},{"w":"blue","ipa":"/bluː/"},{"w":"group","ipa":"/ɡruːp/"},{"w":"tool","ipa":"/tuːl/"},{"w":"move","ipa":"/muːv/"},{"w":"queue","ipa":"/kjuː/"}]},{"ipa":"/ə/","name":"schwa · about（最常见弱读音）","tip":"最松最中性的元音，几乎不费力。非重读音节大量出现：a、the、of、system 的第二音节。","words":[{"w":"about","ipa":"/əˈbaʊt/"},{"w":"system","ipa":"/ˈsɪstəm/"},{"w":"problem","ipa":"/ˈprɑːbləm/"},{"w":"support","ipa":"/səˈpɔːrt/"},{"w":"github","ipa":"/ˈɡɪthʌb/"},{"w":"banana","ipa":"/bəˈnænə/"}]},{"ipa":"/ɜː/","name":"长 er · nurse（AmE 常 /ɝː/）","tip":"舌中抬、嘴不开大，像咬住「呃」拉长。美式带 r 音色写作 /ɝː/。service、merge、version。","ame":"AmE 常标 /ɝː/","words":[{"w":"bird","ipa":"/bɜːrd/"},{"w":"word","ipa":"/wɜːrd/"},{"w":"learn","ipa":"/lɜːrn/"},{"w":"service","ipa":"/ˈsɜːrvɪs/"},{"w":"version","ipa":"/ˈvɜːrʒən/"},{"w":"merge","ipa":"/mɜːrdʒ/"}]}],"quiz":[{"type":"pick-ipa","prompt":"听：bug。选正确音标：","speak":"bug","options":["/bʌɡ/","/bɑːɡ/","/bʊɡ/","/buːɡ/"],"answer":0},{"type":"pick-word","prompt":"哪个词含有 schwa /ə/？","options":["too","about","call","book"],"answer":1},{"type":"pick-ipa","prompt":"听：push。选正确音标：","speak":"push","options":["/puːʃ/","/pʊʃ/","/pʌʃ/","/pɔːʃ/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /ɜː/（nurse）？","options":["put","merge","hot","group"],"answer":1},{"type":"pick-ipa","prompt":"听：queue。选正确音标：","speak":"queue","options":["/kjuː/","/kuː/","/kweɪ/","/kwaɪ/"],"answer":0}]},"day3":{"title":"Day 3 · 双元音","subtitle":"Diphthongs — /eɪ/ /aɪ/ /ɔɪ/ /əʊ~oʊ/ /aʊ/ /ɪə/ /eə/ /ʊə/","symbols":[{"ipa":"/eɪ/","name":"ay · face","tip":"从 /e/ 滑向 /ɪ/。data、array、update 的 a 常是此音。勿念成单元音「诶」。","words":[{"w":"say","ipa":"/seɪ/"},{"w":"make","ipa":"/meɪk/"},{"w":"data","ipa":"/ˈdeɪtə/"},{"w":"array","ipa":"/əˈreɪ/"},{"w":"update","ipa":"/ˈʌpdeɪt/"},{"w":"table","ipa":"/ˈteɪbl/"}]},{"ipa":"/aɪ/","name":"igh · price","tip":"从开口 /a/ 滑向 /ɪ/。write、type、client、pipeline、file 都是此音。","words":[{"w":"my","ipa":"/maɪ/"},{"w":"write","ipa":"/raɪt/"},{"w":"type","ipa":"/taɪp/"},{"w":"client","ipa":"/ˈklaɪənt/"},{"w":"pipeline","ipa":"/ˈpaɪplaɪn/"},{"w":"file","ipa":"/faɪl/"}]},{"ipa":"/ɔɪ/","name":"oy · choice","tip":"从圆唇 /ɔ/ 滑向 /ɪ/。deploy、point、void、join。","words":[{"w":"boy","ipa":"/bɔɪ/"},{"w":"point","ipa":"/pɔɪnt/"},{"w":"deploy","ipa":"/dɪˈplɔɪ/"},{"w":"join","ipa":"/dʒɔɪn/"},{"w":"void","ipa":"/vɔɪd/"},{"w":"noise","ipa":"/nɔɪz/"}]},{"ipa":"/əʊ/","name":"oh · goat（AmE = /oʊ/）","tip":"英式标 /əʊ/，美式标 /oʊ/，同一滑动。code、node、load、repo、open。","ame":"AmE 写作 /oʊ/","words":[{"w":"go","ipa":"/ɡoʊ/"},{"w":"code","ipa":"/koʊd/"},{"w":"node","ipa":"/noʊd/"},{"w":"load","ipa":"/loʊd/"},{"w":"open","ipa":"/ˈoʊpən/"},{"w":"repo","ipa":"/ˈriːpoʊ/"}]},{"ipa":"/aʊ/","name":"ow · mouth","tip":"从 /a/ 滑向 /ʊ/。cloud、out、browse、count、down。","words":[{"w":"now","ipa":"/naʊ/"},{"w":"cloud","ipa":"/klaʊd/"},{"w":"out","ipa":"/aʊt/"},{"w":"browse","ipa":"/braʊz/"},{"w":"count","ipa":"/kaʊnt/"},{"w":"down","ipa":"/daʊn/"}]},{"ipa":"/ɪə/","name":"ear · near（AmE 常 /ɪr/）","tip":"英式是双元音 /ɪə/；美式多为 /ɪ/ + r → /ɪr/。clear、hear、near。","ame":"AmE 常写作 /ɪr/","words":[{"w":"near","ipa":"/nɪr/"},{"w":"clear","ipa":"/klɪr/"},{"w":"hear","ipa":"/hɪr/"},{"w":"year","ipa":"/jɪr/"},{"w":"serious","ipa":"/ˈsɪriəs/"},{"w":"period","ipa":"/ˈpɪriəd/"}]},{"ipa":"/eə/","name":"air · square（AmE 常 /ɛr/）","tip":"英式 /eə/；美式 /ɛr/。share、care、where、error 的 er 在部分口音接近。","ame":"AmE 常写作 /ɛr/","words":[{"w":"care","ipa":"/ker/"},{"w":"share","ipa":"/ʃer/"},{"w":"where","ipa":"/wer/"},{"w":"air","ipa":"/er/"},{"w":"pair","ipa":"/per/"},{"w":"declare","ipa":"/dɪˈkler/"}]},{"ipa":"/ʊə/","name":"ure · poor / tour（AmE 多变）","tip":"英式 /ʊə/；美式常简化为 /ʊr/ 或 /ɔːr/。pure、tour、secure、plural。","ame":"AmE 常 /ʊr/ 或 /ɔːr/","words":[{"w":"pure","ipa":"/pjʊr/"},{"w":"tour","ipa":"/tʊr/"},{"w":"secure","ipa":"/səˈkjʊr/"},{"w":"plural","ipa":"/ˈplʊrəl/"},{"w":"rural","ipa":"/ˈrʊrəl/"},{"w":"jury","ipa":"/ˈdʒʊri/"}]}],"quiz":[{"type":"pick-ipa","prompt":"听：deploy。选正确音标：","speak":"deploy","options":["/dɪˈplɔɪ/","/dɪˈploʊ/","/ˈdeploɪ/","/dɪˈplaɪ/"],"answer":0},{"type":"pick-word","prompt":"哪个词含有 /aʊ/？","options":["code","cloud","type","say"],"answer":1},{"type":"pick-ipa","prompt":"听：pipeline。选正确音标：","speak":"pipeline","options":["/ˈpɪplaɪn/","/ˈpaɪplaɪn/","/ˈpeɪplaɪn/","/ˈpaɪpliːn/"],"answer":1},{"type":"pick-word","prompt":"美式 /oʊ/（goat）出现在哪个词？","options":["now","node","near","noise"],"answer":1},{"type":"pick-ipa","prompt":"听：data（美式常见读法）。选音标：","speak":"data","options":["/ˈdætə/","/ˈdeɪtə/","/ˈdɑːtə/","/ˈditə/"],"answer":1}]},"day4":{"title":"Day 4 · 爆破音与鼻音","subtitle":"Stops & nasals — /p/ /b/ /t/ /d/ /k/ /ɡ/ /m/ /n/ /ŋ/","symbols":[{"ipa":"/p/","name":"清双唇爆破 · pen","tip":"双唇紧闭后突然放开，词首送气（pin）。中文「扑」相近，但英语词尾 /p/ 常不爆破（stop）。","words":[{"w":"pen","ipa":"/pen/"},{"w":"push","ipa":"/pʊʃ/"},{"w":"app","ipa":"/æp/"},{"w":"deploy","ipa":"/dɪˈplɔɪ/"},{"w":"port","ipa":"/pɔːrt/"},{"w":"python","ipa":"/ˈpaɪθɑːn/"}]},{"ipa":"/b/","name":"浊双唇爆破 · bee","tip":"与 /p/ 同部位，但声带振动、词首不送气。bug、build、button、binary。","words":[{"w":"bee","ipa":"/biː/"},{"w":"bug","ipa":"/bʌɡ/"},{"w":"build","ipa":"/bɪld/"},{"w":"button","ipa":"/ˈbʌtn/"},{"w":"binary","ipa":"/ˈbaɪnəri/"},{"w":"debug","ipa":"/ˌdiːˈbʌɡ/"}]},{"ipa":"/t/","name":"清齿龈爆破 · tea","tip":"舌尖抵上齿龈后放开。美式词中 /t/ 在元音间常变拍音 [ɾ]（如 better ≈ bedder）。","words":[{"w":"tea","ipa":"/tiː/"},{"w":"test","ipa":"/test/"},{"w":"update","ipa":"/ˈʌpdeɪt/"},{"w":"git","ipa":"/ɡɪt/"},{"w":"client","ipa":"/ˈklaɪənt/"},{"w":"byte","ipa":"/baɪt/"}]},{"ipa":"/d/","name":"浊齿龈爆破 · day","tip":"与 /t/ 同部位，声带振动。data、download、node、debug、code。","words":[{"w":"day","ipa":"/deɪ/"},{"w":"data","ipa":"/ˈdeɪtə/"},{"w":"download","ipa":"/ˈdaʊnloʊd/"},{"w":"node","ipa":"/noʊd/"},{"w":"code","ipa":"/koʊd/"},{"w":"index","ipa":"/ˈɪndeks/"}]},{"ipa":"/k/","name":"清软腭爆破 · key","tip":"舌后抵软腭。cache、key、cloud、stack、cookie、click。词首送气。","words":[{"w":"key","ipa":"/kiː/"},{"w":"cache","ipa":"/kæʃ/"},{"w":"cloud","ipa":"/klaʊd/"},{"w":"stack","ipa":"/stæk/"},{"w":"cookie","ipa":"/ˈkʊki/"},{"w":"click","ipa":"/klɪk/"}]},{"ipa":"/ɡ/","name":"浊软腭爆破 · go","tip":"与 /k/ 同部位但浊音。go、bug、git、group、lag、log。勿与 /dʒ/ 混淆。","words":[{"w":"go","ipa":"/ɡoʊ/"},{"w":"bug","ipa":"/bʌɡ/"},{"w":"git","ipa":"/ɡɪt/"},{"w":"group","ipa":"/ɡruːp/"},{"w":"lag","ipa":"/læɡ/"},{"w":"log","ipa":"/lɔːɡ/"}]},{"ipa":"/m/","name":"双唇鼻音 · me","tip":"双唇闭合，气流从鼻腔出。message、merge、system、team、memory。","words":[{"w":"me","ipa":"/miː/"},{"w":"message","ipa":"/ˈmesɪdʒ/"},{"w":"merge","ipa":"/mɜːrdʒ/"},{"w":"system","ipa":"/ˈsɪstəm/"},{"w":"team","ipa":"/tiːm/"},{"w":"memory","ipa":"/ˈmeməri/"}]},{"ipa":"/n/","name":"齿龈鼻音 · no","tip":"舌尖抵齿龈，鼻腔共鸣。node、run、function、binary、network。","words":[{"w":"no","ipa":"/noʊ/"},{"w":"node","ipa":"/noʊd/"},{"w":"run","ipa":"/rʌn/"},{"w":"function","ipa":"/ˈfʌŋkʃən/"},{"w":"binary","ipa":"/ˈbaɪnəri/"},{"w":"network","ipa":"/ˈnetwɜːrk/"}]},{"ipa":"/ŋ/","name":"软腭鼻音 · sing（ng）","tip":"舌后抵软腭，像中文「嗯」靠后。function、string、ranking、hang、ping。无后加 /ɡ/。","words":[{"w":"sing","ipa":"/sɪŋ/"},{"w":"string","ipa":"/strɪŋ/"},{"w":"function","ipa":"/ˈfʌŋkʃən/"},{"w":"ranking","ipa":"/ˈræŋkɪŋ/"},{"w":"hang","ipa":"/hæŋ/"},{"w":"ping","ipa":"/pɪŋ/"}]}],"quiz":[{"type":"pick-ipa","prompt":"听：cache。词首辅音是？","speak":"cache","options":["/ʃ/","/k/","/tʃ/","/ɡ/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /ŋ/（ng）？","options":["run","string","node","team"],"answer":1},{"type":"pick-ipa","prompt":"听：bug。词尾辅音是？","speak":"bug","options":["/k/","/ɡ/","/dʒ/","/ŋ/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /b/？","options":["push","binary","cache","key"],"answer":1},{"type":"pick-ipa","prompt":"听：ping。选正确音标：","speak":"ping","options":["/pɪn/","/pɪŋ/","/piːŋ/","/pɪŋɡ/"],"answer":1}]},"day5":{"title":"Day 5 · 摩擦音","subtitle":"Fricatives — /f/ /v/ /θ/ /ð/ /s/ /z/ /ʃ/ /ʒ/ /h/","symbols":[{"ipa":"/f/","name":"清唇齿摩擦 · fan","tip":"上齿轻触下唇，气流摩擦。file、function、full、fix、buffer。","words":[{"w":"fan","ipa":"/fæn/"},{"w":"file","ipa":"/faɪl/"},{"w":"function","ipa":"/ˈfʌŋkʃən/"},{"w":"full","ipa":"/fʊl/"},{"w":"fix","ipa":"/fɪks/"},{"w":"buffer","ipa":"/ˈbʌfər/"}]},{"ipa":"/v/","name":"浊唇齿摩擦 · van","tip":"与 /f/ 同部位但声带振动。中国人常把 /v/ 念成 /w/（very → wery）。version、void、server。","words":[{"w":"van","ipa":"/væn/"},{"w":"version","ipa":"/ˈvɜːrʒən/"},{"w":"void","ipa":"/vɔɪd/"},{"w":"server","ipa":"/ˈsɜːrvər/"},{"w":"value","ipa":"/ˈvæljuː/"},{"w":"variable","ipa":"/ˈveriəbl/"}]},{"ipa":"/θ/","name":"清齿间摩擦 · think（th）","tip":"舌尖轻触上齿边缘吹气，无声带。think、method、auth、path、thickness。勿念成 /s/。","words":[{"w":"think","ipa":"/θɪŋk/"},{"w":"method","ipa":"/ˈmeθəd/"},{"w":"auth","ipa":"/ɔːθ/"},{"w":"path","ipa":"/pæθ/"},{"w":"three","ipa":"/θriː/"},{"w":"thread","ipa":"/θred/"}]},{"ipa":"/ð/","name":"浊齿间摩擦 · this（th）","tip":"与 /θ/ 同部位但浊音。the、this、that、other、with、algorithm 中的 th。","words":[{"w":"this","ipa":"/ðɪs/"},{"w":"the","ipa":"/ðə/"},{"w":"that","ipa":"/ðæt/"},{"w":"other","ipa":"/ˈʌðər/"},{"w":"with","ipa":"/wɪð/"},{"w":"algorithm","ipa":"/ˈælɡərɪðəm/"}]},{"ipa":"/s/","name":"清齿龈摩擦 · see","tip":"舌尖靠近齿龈，气流尖锐。system、source、stack、service、syntax、class。","words":[{"w":"see","ipa":"/siː/"},{"w":"system","ipa":"/ˈsɪstəm/"},{"w":"source","ipa":"/sɔːrs/"},{"w":"stack","ipa":"/stæk/"},{"w":"service","ipa":"/ˈsɜːrvɪs/"},{"w":"syntax","ipa":"/ˈsɪntæks/"}]},{"ipa":"/z/","name":"浊齿龈摩擦 · zoo","tip":"与 /s/ 同部位但浊音。零结尾复数常是 /z/：bugs、files、keys。busy、result、lazy。","words":[{"w":"zoo","ipa":"/zuː/"},{"w":"bugs","ipa":"/bʌɡz/"},{"w":"files","ipa":"/faɪlz/"},{"w":"keys","ipa":"/kiːz/"},{"w":"result","ipa":"/rɪˈzʌlt/"},{"w":"busy","ipa":"/ˈbɪzi/"}]},{"ipa":"/ʃ/","name":"清硬腭摩擦 · ship（sh）","tip":"舌前抬向硬腭，嘴唇略圆。cache /kæʃ/、push、function、share、shell、session。","words":[{"w":"ship","ipa":"/ʃɪp/"},{"w":"cache","ipa":"/kæʃ/"},{"w":"push","ipa":"/pʊʃ/"},{"w":"share","ipa":"/ʃer/"},{"w":"shell","ipa":"/ʃel/"},{"w":"session","ipa":"/ˈseʃən/"}]},{"ipa":"/ʒ/","name":"浊硬腭摩擦 · measure","tip":"与 /ʃ/ 同部位但浊音。较少见：version、measure、visual、usual、garage（AmE）。","words":[{"w":"measure","ipa":"/ˈmeʒər/"},{"w":"version","ipa":"/ˈvɜːrʒən/"},{"w":"visual","ipa":"/ˈvɪʒuəl/"},{"w":"usual","ipa":"/ˈjuːʒuəl/"},{"w":"garage","ipa":"/ɡəˈrɑːʒ/"},{"w":"decision","ipa":"/dɪˈsɪʒən/"}]},{"ipa":"/h/","name":"清声门摩擦 · hat","tip":"气流轻擦声门，像呵气。host、header、hash、hang、http（说字母时）。词中常弱化。","words":[{"w":"hat","ipa":"/hæt/"},{"w":"host","ipa":"/hoʊst/"},{"w":"header","ipa":"/ˈhedər/"},{"w":"hash","ipa":"/hæʃ/"},{"w":"hang","ipa":"/hæŋ/"},{"w":"hello","ipa":"/həˈloʊ/"}]}],"quiz":[{"type":"pick-ipa","prompt":"听：think。词首音是？","speak":"think","options":["/s/","/θ/","/ð/","/f/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /ʃ/？","options":["stack","cache","bugs","void"],"answer":1},{"type":"pick-ipa","prompt":"听：version。中间的辅音是？","speak":"version","options":["/ʃ/","/ʒ/","/z/","/dʒ/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /ð/（浊 th）？","options":["think","path","other","auth"],"answer":2},{"type":"pick-ipa","prompt":"听：server。选正确音标：","speak":"server","options":["/ˈsɜːrvər/","/ˈsɜːrfər/","/ˈsevər/","/ˈzɜːrvər/"],"answer":0}]},"day6":{"title":"Day 6 · 破擦音与近音","subtitle":"Affricates & approximants — /tʃ/ /dʒ/ /l/ /r/ /w/ /j/","symbols":[{"ipa":"/tʃ/","name":"清破擦 · chip（ch）","tip":"/t/ + /ʃ/ 连成一体。check、cache 不是此音；change、fetch、match、batch、watch。","words":[{"w":"chip","ipa":"/tʃɪp/"},{"w":"check","ipa":"/tʃek/"},{"w":"fetch","ipa":"/fetʃ/"},{"w":"match","ipa":"/mætʃ/"},{"w":"batch","ipa":"/bætʃ/"},{"w":"change","ipa":"/tʃeɪndʒ/"}]},{"ipa":"/dʒ/","name":"浊破擦 · judge（j / soft g）","tip":"/d/ + /ʒ/。Java、object、badge、merge、logic、edge。勿与 /ʒ/ 或 /j/ 混淆。","words":[{"w":"judge","ipa":"/dʒʌdʒ/"},{"w":"java","ipa":"/ˈdʒɑːvə/"},{"w":"object","ipa":"/ˈɑːbdʒekt/"},{"w":"badge","ipa":"/bædʒ/"},{"w":"merge","ipa":"/mɜːrdʒ/"},{"w":"logic","ipa":"/ˈlɑːdʒɪk/"}]},{"ipa":"/l/","name":"齿龈边音 · light","tip":"舌尖抵齿龈，气流从两侧出。词尾「暗 l」舌后抬（file、full）。load、list、log、latency。","words":[{"w":"light","ipa":"/laɪt/"},{"w":"load","ipa":"/loʊd/"},{"w":"list","ipa":"/lɪst/"},{"w":"log","ipa":"/lɔːɡ/"},{"w":"latency","ipa":"/ˈleɪtənsi/"},{"w":"full","ipa":"/fʊl/"}]},{"ipa":"/r/","name":"近音 r · red（AmE）","tip":"美式：舌尖上卷不触腭，嘴唇略圆。run、array、error、repo、browser、server。英式非 rhotic 词尾常不发 /r/。","words":[{"w":"red","ipa":"/red/"},{"w":"run","ipa":"/rʌn/"},{"w":"array","ipa":"/əˈreɪ/"},{"w":"error","ipa":"/ˈerər/"},{"w":"repo","ipa":"/ˈriːpoʊ/"},{"w":"browser","ipa":"/ˈbraʊzər/"}]},{"ipa":"/w/","name":"双唇软腭近音 · we","tip":"双唇收圆后迅速张开，像短促 /u/。web、window、query、one、queue 中的 /w/ 感来自圆唇。","words":[{"w":"we","ipa":"/wiː/"},{"w":"web","ipa":"/web/"},{"w":"window","ipa":"/ˈwɪndoʊ/"},{"w":"query","ipa":"/ˈkwɪri/"},{"w":"one","ipa":"/wʌn/"},{"w":"software","ipa":"/ˈsɔːftwer/"}]},{"ipa":"/j/","name":"硬腭近音 · yes（y）","tip":"舌前抬向硬腭，像短促 /i/。yes、user、queue /kjuː/、unix、yaml、unit。","words":[{"w":"yes","ipa":"/jes/"},{"w":"user","ipa":"/ˈjuːzər/"},{"w":"queue","ipa":"/kjuː/"},{"w":"unix","ipa":"/ˈjuːnɪks/"},{"w":"unit","ipa":"/ˈjuːnɪt/"},{"w":"yaml","ipa":"/ˈjæməl/"}]}],"quiz":[{"type":"pick-ipa","prompt":"听：fetch。词尾音是？","speak":"fetch","options":["/ʃ/","/tʃ/","/dʒ/","/θ/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /dʒ/？","options":["check","java","ship","web"],"answer":1},{"type":"pick-ipa","prompt":"听：queue。选正确音标：","speak":"queue","options":["/kuː/","/kjuː/","/kwaɪ/","/kjuːi/"],"answer":1},{"type":"pick-word","prompt":"哪个词含有 /w/？","options":["user","query","yes","list"],"answer":1},{"type":"pick-ipa","prompt":"听：latency。选正确音标：","speak":"latency","options":["/ˈlætənsi/","/ˈleɪtənsi/","/ˈleɪtnsi/","/ˈlitənsi/"],"answer":1}]},"day7":{"title":"Day 7 · 复习与读词典","subtitle":"Minimal pairs · connected speech · dictionary entries","review":true,"symbols":[{"ipa":"对比","name":"最小对立 · Minimal pairs","tip":"只差一个音就能区分词义。练听辨：先点听，再看音标，最后自己跟读。","words":[{"w":"bit / beat","ipa":"/bɪt/ · /biːt/"},{"w":"bed / bad","ipa":"/bed/ · /bæd/"},{"w":"full / fool","ipa":"/fʊl/ · /fuːl/"},{"w":"ship / chip","ipa":"/ʃɪp/ · /tʃɪp/"},{"w":"thin / sin","ipa":"/θɪn/ · /sɪn/"},{"w":"vest / west","ipa":"/vest/ · /west/"}]},{"ipa":"/ə/","name":"弱读与连读 · Weak forms","tip":"功能词非重读时常变 schwa：a /ə/、the /ðə/、of /əv/、to /tə/、can /kən/。读词典时看重音符号 ˈ 。","words":[{"w":"a system","ipa":"/ə ˈsɪstəm/"},{"w":"of the","ipa":"/əv ðə/"},{"w":"to update","ipa":"/tə ˈʌpdeɪt/"},{"w":"can run","ipa":"/kən rʌn/"},{"w":"for you","ipa":"/fər juː/"},{"w":"and then","ipa":"/ən ðen/"}],"speakWords":["a system","of the","to update","can run","for you","and then"]},{"ipa":"ˈ ˌ","name":"如何读词典条目","tip":"重音 ˈ 在重读音节前；次重音 ˌ 。斜线 /…/ 是宽式音标。括号 (r) 表示连读才发音。美式常标 r 音色。","words":[{"w":"computer","ipa":"/kəmˈpjuːtər/"},{"w":"application","ipa":"/ˌæplɪˈkeɪʃən/"},{"w":"repository","ipa":"/rɪˈpɑːzɪtɔːri/"},{"w":"algorithm","ipa":"/ˈælɡərɪðəm/"},{"w":"database","ipa":"/ˈdeɪtəbeɪs/"},{"w":"infrastructure","ipa":"/ˈɪnfrəstrʌktʃər/"}]},{"ipa":"AmE","name":"美式 vs 英式 · 常考点","tip":"① /ɒ/→AmE /ɑː/ ② /əʊ/→/oʊ/ ③ rhotic：美式词尾 r 发音 ④ schedule：AmE /ˈskedʒuːl/ BrE /ˈʃedjuːl/","words":[{"w":"hot","ipa":"BrE /hɒt/ · AmE /hɑːt/"},{"w":"go","ipa":"BrE /ɡəʊ/ · AmE /ɡoʊ/"},{"w":"car","ipa":"BrE /kɑː/ · AmE /kɑːr/"},{"w":"schedule","ipa":"AmE /ˈskedʒuːl/"},{"w":"mobile","ipa":"AmE /ˈmoʊbl/ · BrE /ˈməʊbaɪl/"},{"w":"privacy","ipa":"AmE /ˈpraɪvəsi/"}]}],"quiz":[{"type":"pick-ipa","prompt":"听：computer。选正确音标：","speak":"computer","options":["/ˈkɑːmpjuːtər/","/kəmˈpjuːtər/","/kəmˈpuːtər/","/ˈkʌmpjutər/"],"answer":1},{"type":"pick-word","prompt":"bit 和 beat 的区别在哪个元音？","options":["/ɪ/ vs /iː/","/e/ vs /æ/","/ʊ/ vs /uː/","/ʌ/ vs /ɑː/"],"answer":0},{"type":"pick-ipa","prompt":"听：algorithm。选正确音标：","speak":"algorithm","options":["/ˈælɡərɪðəm/","/ˈælɡərɪθəm/","/ˈælɡoʊrɪðəm/","/ælˈɡɔːrɪðəm/"],"answer":0},{"type":"pick-word","prompt":"非重读 a/the/of 最常变成哪个音？","options":["/æ/","/ɑː/","/ə/","/ʌ/"],"answer":2},{"type":"pick-ipa","prompt":"听：cache。选正确音标：","speak":"cache","options":["/keɪʃ/","/kæʃ/","/kɑːʃ/","/kætʃ/"],"answer":1}]}};
+
+const DAY_ORDER = ["intro","day1","day2","day3","day4","day5","day6","day7","quiz"];
+const DAY_META = {
+  intro: { num: "·", title: "导读", short: "开始之前" },
+  day1: { num: "1", title: "短/长前元音", short: "/ɪ/ /iː/ /e/ /æ/" },
+  day2: { num: "2", title: "后元音与中元音", short: "/ʌ/ /ɑː/ /ʊ/ /uː/…" },
+  day3: { num: "3", title: "双元音", short: "/eɪ/ /aɪ/ /oʊ/…" },
+  day4: { num: "4", title: "爆破音与鼻音", short: "/p/ /b/ /t/ /d/…" },
+  day5: { num: "5", title: "摩擦音", short: "/f/ /v/ /θ/ /ð/…" },
+  day6: { num: "6", title: "破擦音与近音", short: "/tʃ/ /dʒ/ /l/ /r/…" },
+  day7: { num: "7", title: "复习与读词典", short: "对比 · 弱读 · 重音" },
+  quiz: { num: "✓", title: "总测验", short: "巩固听辨" }
+};
+
+const STORAGE_KEY = "ipa-course-progress-v2";
+const player = document.getElementById("player");
+let currentView = "intro";
+let playingChip = null;
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function audioPath(word) {
+  const w = String(word).trim().toLowerCase();
+  if (!w) return null;
+  // only single tokens in folder
+  if (/^[a-z]+$/.test(w)) return `ipa-audio/${w}.mp3`;
+  return null;
+}
+
+function tokensForSpeak(text) {
+  // "bit / beat" -> ["bit","beat"]; "a system" -> ["a","system"]
+  const raw = String(text).trim();
+  if (raw.includes(" / ")) return raw.split(" / ").map(s => s.trim().toLowerCase()).filter(Boolean);
+  return raw.toLowerCase().split(/\s+/).filter(t => /^[a-z]+$/.test(t));
+}
+
+function stopAudio() {
+  player.pause();
+  player.removeAttribute("src");
+  player.load();
+  if (playingChip) {
+    playingChip.classList.remove("playing", "playing-a", "playing-b");
+    playingChip = null;
+  }
+}
+
+function playQueue(urls, chip, modeClass) {
+  stopAudio();
+  if (!urls.length) return;
+  playingChip = chip;
+  if (chip) {
+    chip.classList.add(modeClass || "playing");
+  }
+  let i = 0;
+  const next = () => {
+    if (i >= urls.length) {
+      if (chip) chip.classList.remove("playing", "playing-a", "playing-b");
+      playingChip = null;
+      return;
+    }
+    player.src = urls[i++];
+    player.play().catch(() => next());
+  };
+  player.onended = next;
+  player.onerror = next;
+  next();
+}
+
+function playWord(wordOrText, chip, modeClass) {
+  const tokens = tokensForSpeak(wordOrText);
+  const urls = tokens.map(audioPath).filter(Boolean);
+  if (!urls.length) {
+    // last resort: try whole string slug
+    const p = audioPath(wordOrText);
+    if (p) playQueue([p], chip, modeClass);
+    return;
+  }
+  playQueue(urls, chip, modeClass);
+}
+
+function dictUrl(word) {
+  const w = tokensForSpeak(word)[0] || String(word).trim();
+  return `https://dictionary.cambridge.org/dictionary/english/${encodeURIComponent(w)}`;
+}
+
+function playIcon() {
+  return `<span class="icon-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86a1 1 0 0 0-1.5.86z"/></svg></span><span class="wave" aria-hidden="true"><i></i><i></i><i></i></span>`;
+}
+
+function renderWordChip(item) {
+  const label = item.w;
+  const ipa = item.ipa || "";
+  // minimal pair chip
+  if (label.includes(" / ")) {
+    const [a, b] = label.split(" / ").map(s => s.trim());
+    return `<div class="pair-chip" data-pair="1">
+      <span class="part" data-word="${esc(a)}"><span class="w">${esc(a)}</span>
+        <button type="button" class="play" data-play="${esc(a)}" aria-label="播放 ${esc(a)}">${playIcon()}</button></span>
+      <span class="sep">/</span>
+      <span class="part" data-word="${esc(b)}"><span class="w">${esc(b)}</span>
+        <button type="button" class="play" data-play="${esc(b)}" aria-label="播放 ${esc(b)}">${playIcon()}</button></span>
+    </div>`;
+  }
+  const speak = label;
+  return `<div class="word-chip" data-word="${esc(speak)}">
+    <div class="word-meta">
+      <span class="w">${esc(label)}</span>
+      <span class="ipa">${esc(ipa)}</span>
+    </div>
+    <button type="button" class="play" data-play="${esc(speak)}" aria-label="播放 ${esc(label)}">${playIcon()}</button>
+  </div>`;
+}
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+  catch { return {}; }
+}
+function saveProgress(p) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+function updateProgressUI() {
+  const p = loadProgress();
+  const done = ["day1","day2","day3","day4","day5","day6","day7"].filter(d => p[d]).length;
+  document.getElementById("progressText").textContent = `${done} / 7`;
+  document.getElementById("progressBar").style.width = `${(done/7)*100}%`;
+  document.querySelectorAll(".nav-btn[data-view]").forEach(btn => {
+    const v = btn.dataset.view;
+    btn.classList.toggle("done", !!p[v]);
+    btn.classList.toggle("active", v === currentView);
+  });
+  document.querySelectorAll("#dayChips button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.view === currentView);
+  });
+}
+
+function renderNav() {
+  const nav = document.getElementById("nav");
+  const chips = document.getElementById("dayChips");
+  nav.innerHTML = "";
+  chips.innerHTML = "";
+  for (const key of DAY_ORDER) {
+    const m = DAY_META[key];
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "nav-btn";
+    btn.dataset.view = key;
+    btn.innerHTML = `<span class="num">${m.num}</span><span class="label"><strong>${esc(m.title)}</strong><span>${esc(m.short)}</span></span>`;
+    btn.addEventListener("click", () => { showView(key); closeMenu(); });
+    nav.appendChild(btn);
+
+    if (key !== "intro" && key !== "quiz") {
+      const c = document.createElement("button");
+      c.type = "button";
+      c.dataset.view = key;
+      c.textContent = `Day ${m.num}`;
+      c.addEventListener("click", () => showView(key));
+      chips.appendChild(c);
+    }
+  }
+}
+
+function renderIntro() {
+  return `
+  <div class="hero">
+    <div class="eyebrow">7-Day Path</div>
+    <h2>用一周把美式 IPA 听清楚、说到位</h2>
+    <p class="sub">不依赖浏览器朗读，也不跳转到外站。每个例词都配有真人发音，点击即可在本页播放。</p>
+    <div class="hero-actions">
+      <button class="btn primary" data-go="day1">开始 Day 1</button>
+      <button class="btn ghost" data-go="day7">先看复习方法</button>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>这门课怎么用</h3>
+    <ul>
+      <li><b>听</b>：点例词旁的圆形播放键，听真人美式发音（本地音频）。</li>
+      <li><b>跟</b>：看着音标轻声跟读，注意口型与时长（长短元音）。</li>
+      <li><b>辨</b>：每天底部有小测验；可先听再选。</li>
+      <li><b>查</b>：若需更多释义，可用卡片旁的「在词典打开」（可选，不打断主流程）。</li>
+    </ul>
+    <div class="goals">
+      <div><strong>Day 1–2</strong>元音骨架：前/后/中与长短对立</div>
+      <div><strong>Day 3</strong>双元音滑动：face / price / goat…</div>
+      <div><strong>Day 4–6</strong>辅音：爆破、摩擦、破擦与近音</div>
+      <div><strong>Day 7</strong>最小对立、弱读、如何读词典</div>
+    </div>
+  </div>
+  <div class="tip-banner">提示：请把本 HTML 与 <b>ipa-audio/</b> 文件夹放在同一目录（或解压 ipa-course.zip）。用浏览器直接打开即可离线学习。</div>
+  `;
+}
+
+function renderDay(key) {
+  const day = DAYS[key];
+  if (!day) return `<p>未找到课程。</p>`;
+  const p = loadProgress();
+  const symbols = (day.symbols || []).map(sym => `
+    <article class="symbol">
+      <div class="symbol-head">
+        <div>
+          <h3 class="symbol-ipa">${esc(sym.ipa)}</h3>
+          <p class="symbol-name">${esc(sym.name)}</p>
+        </div>
+        ${sym.ame ? `<span class="ame-pill">${esc(sym.ame)}</span>` : ""}
+      </div>
+      <p class="symbol-tip">${esc(sym.tip)}</p>
+      <div class="words">${(sym.words || []).map(renderWordChip).join("")}</div>
+      <div style="margin-top:12px">
+        ${(sym.words || []).slice(0,1).map(w => {
+          const token = tokensForSpeak(w.w)[0];
+          return token ? `<a class="dict-link" href="${dictUrl(token)}" target="_blank" rel="noopener">在词典打开 · ${esc(token)}</a>` : "";
+        }).join("")}
+      </div>
+    </article>
+  `).join("");
+
+  const quizHtml = renderQuizBlock(day.quiz || [], key);
+
+  return `
+  <div class="hero">
+    <div class="eyebrow">Day ${DAY_META[key].num}</div>
+    <h2>${esc(day.title.replace(/^Day \\d+ · /, ""))}</h2>
+    <p class="sub">${esc(day.subtitle)}</p>
+    <div class="hero-actions">
+      <button class="btn primary" id="playAllBtn">顺序播放本课例词</button>
+      <button class="btn" id="stopBtn">停止</button>
+    </div>
+    <label class="mark-done"><input type="checkbox" id="markDone" ${p[key] ? "checked" : ""}/> 标记本日已完成</label>
+  </div>
+  <div class="section-label">音标卡片</div>
+  ${symbols}
+  <div class="section-label">本日小测</div>
+  ${quizHtml}
+  <div class="footer-nav">
+    <button class="btn ghost" data-go="${prevKey(key)}">← 上一节</button>
+    <button class="btn primary" data-go="${nextKey(key)}">下一节 →</button>
+  </div>
+  `;
+}
+
+function prevKey(key) {
+  const i = DAY_ORDER.indexOf(key);
+  return DAY_ORDER[Math.max(0, i - 1)];
+}
+function nextKey(key) {
+  const i = DAY_ORDER.indexOf(key);
+  return DAY_ORDER[Math.min(DAY_ORDER.length - 1, i + 1)];
+}
+
+function renderQuizBlock(quiz, dayKey) {
+  if (!quiz.length) return `<div class="panel"><p>本日无测验。</p></div>`;
+  const items = quiz.map((q, i) => {
+    const listenBtn = q.speak ? `
+      <div class="quiz-listen">
+        <button type="button" class="btn" data-play="${esc(q.speak)}" aria-label="听 ${esc(q.speak)}">▶ 听发音</button>
+      </div>` : "";
+    const opts = q.options.map((opt, oi) =>
+      `<button type="button" class="opt" data-quiz="${esc(dayKey)}" data-qi="${i}" data-oi="${oi}">${esc(opt)}</button>`
+    ).join("");
+    return `<div class="quiz-card" data-answer="${q.answer}">
+      <div class="q-num">Question ${i + 1}</div>
+      <p class="prompt">${esc(q.prompt)}</p>
+      ${listenBtn}
+      <div class="options">${opts}</div>
+    </div>`;
+  }).join("");
+  return `${items}<div class="quiz-score" id="quizScore-${esc(dayKey)}">作答后显示得分</div>`;
+}
+
+function renderFinalQuiz() {
+  // merge a few from each day
+  const pooled = [];
+  for (const k of ["day1","day2","day3","day4","day5","day6","day7"]) {
+    (DAYS[k].quiz || []).slice(0, 2).forEach(q => pooled.push({ ...q, _day: k }));
+  }
+  return `
+  <div class="hero">
+    <div class="eyebrow">Review</div>
+    <h2>总测验 · 听辨巩固</h2>
+    <p class="sub">从七天课程中抽取题目。先点「听发音」，再选择音标或单词。</p>
+  </div>
+  ${renderQuizBlock(pooled, "final")}
+  <div class="footer-nav">
+    <button class="btn ghost" data-go="day7">← 返回 Day 7</button>
+    <button class="btn primary" data-go="intro">回到导读</button>
+  </div>`;
+}
+
+function showView(key) {
+  currentView = key;
+  stopAudio();
+  const view = document.getElementById("view");
+  if (key === "intro") view.innerHTML = renderIntro();
+  else if (key === "quiz") view.innerHTML = renderFinalQuiz();
+  else view.innerHTML = renderDay(key);
+  bindViewEvents();
+  updateProgressUI();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function bindViewEvents() {
+  const view = document.getElementById("view");
+  view.querySelectorAll("[data-go]").forEach(el => {
+    el.addEventListener("click", () => showView(el.dataset.go));
+  });
+  view.querySelectorAll("[data-play]").forEach(el => {
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const chip = el.closest(".word-chip") || el.closest(".pair-chip") || el;
+      playWord(el.dataset.play, chip.classList ? chip : null);
+    });
+  });
+  const mark = document.getElementById("markDone");
+  if (mark) {
+    mark.addEventListener("change", () => {
+      const p = loadProgress();
+      p[currentView] = mark.checked;
+      saveProgress(p);
+      updateProgressUI();
+    });
+  }
+  const stopBtn = document.getElementById("stopBtn");
+  if (stopBtn) stopBtn.addEventListener("click", stopAudio);
+  const playAll = document.getElementById("playAllBtn");
+  if (playAll) playAll.addEventListener("click", () => playAllDay(currentView));
+
+  view.querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", () => onQuizAnswer(btn));
+  });
+}
+
+function playAllDay(key) {
+  const day = DAYS[key];
+  if (!day) return;
+  const words = [];
+  for (const sym of day.symbols || []) {
+    for (const w of sym.words || []) {
+      if (w.w.includes(" / ")) {
+        w.w.split(" / ").forEach(p => words.push(p.trim()));
+      } else {
+        words.push(w.w);
+      }
+    }
+  }
+  const urls = [];
+  words.forEach(w => tokensForSpeak(w).forEach(t => {
+    const p = audioPath(t);
+    if (p) urls.push(p);
+  }));
+  // dedupe consecutive
+  const uniq = [];
+  for (const u of urls) if (uniq[uniq.length-1] !== u) uniq.push(u);
+  playQueue(uniq.slice(0, 40), null);
+}
+
+function onQuizAnswer(btn) {
+  const card = btn.closest(".quiz-card");
+  if (!card || card.dataset.locked) return;
+  const answer = Number(card.dataset.answer);
+  const oi = Number(btn.dataset.oi);
+  const opts = [...card.querySelectorAll(".opt")];
+  opts.forEach((o, idx) => {
+    o.disabled = true;
+    if (idx === answer) o.classList.add("correct");
+    if (idx === oi && oi !== answer) o.classList.add("wrong");
+  });
+  card.dataset.locked = "1";
+  card.dataset.correct = oi === answer ? "1" : "0";
+  // score
+  const quizId = btn.dataset.quiz;
+  const cards = [...document.querySelectorAll(`.opt[data-quiz="${quizId}"]`)].map(o => o.closest(".quiz-card"));
+  const unique = [...new Set(cards)];
+  const answered = unique.filter(c => c.dataset.locked);
+  const correct = unique.filter(c => c.dataset.correct === "1").length;
+  const box = document.getElementById(`quizScore-${quizId}`);
+  if (box) box.innerHTML = `已答 <b>${answered.length}</b> / ${unique.length}，正确 <b>${correct}</b>`;
+}
+
+function closeMenu() {
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("overlay").classList.remove("show");
+}
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("sidebar").classList.add("open");
+  document.getElementById("overlay").classList.add("show");
+});
+document.getElementById("overlay").addEventListener("click", closeMenu);
+
+renderNav();
+showView("intro");
+updateProgressUI();
+</script>
+</body>
+</html>
