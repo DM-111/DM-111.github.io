@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>词根词缀完整课程 · Academic & Tech English</title>
+<meta name="description" content="十二天英语词根词缀课程：高频前后缀与拉丁/希腊词根，真人发音、页内播放，面向学术与 SDE 技术英语。" />
+<style>
+
+:root {
+  --bg: #f6f3ee;
+  --bg-elevated: #fffcf8;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --ink-soft: #44403c;
+  --muted: #78716c;
+  --faint: #a8a29e;
+  --border: #e8e4dc;
+  --border-strong: #d6d0c4;
+  --accent: #b45309;
+  --accent-deep: #9a3412;
+  --accent-soft: #fff7ed;
+  --accent-ring: rgba(180, 83, 9, 0.22);
+  --success: #3f6212;
+  --success-soft: #f3f8e8;
+  --danger: #b91c1c;
+  --danger-soft: #fef2f2;
+  --shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.04);
+  --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.05);
+  --radius: 16px;
+  --radius-sm: 12px;
+  --sidebar-w: 268px;
+  --font: "Inter", "SF Pro Text", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-ipa: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Songti SC", serif;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+button, select { font: inherit; }
+a { color: var(--accent-deep); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  padding: 28px 18px 32px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 30;
+}
+.brand {
+  padding: 0 10px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.brand-kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.brand h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+  font-weight: 650;
+  color: var(--ink);
+}
+.brand p {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink-soft);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  transition: background .18s var(--ease), border-color .18s, color .18s, box-shadow .18s;
+}
+.nav-btn:hover { background: rgba(255,255,255,.7); color: var(--ink); }
+.nav-btn.active {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+.nav-btn .num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: 0.72rem;
+  font-weight: 650;
+  background: #efeae2;
+  color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.nav-btn.active .num,
+.nav-btn.done .num {
+  background: var(--accent-soft);
+  color: var(--accent-deep);
+}
+.nav-btn .label { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nav-btn .label strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.nav-btn .label span {
+  font-size: 0.75rem;
+  color: var(--faint);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-btn.active .label span { color: var(--muted); }
+
+.progress-wrap {
+  margin: 20px 10px 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.progress-wrap .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.progress-wrap .row b { color: var(--ink); font-weight: 600; }
+.bar {
+  height: 4px;
+  background: #efeae2;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width .35s var(--ease);
+}
+
+.sidebar-note {
+  margin: 16px 10px 0;
+  font-size: 0.75rem;
+  color: var(--faint);
+  line-height: 1.45;
+}
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 50;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 9px 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(28, 25, 23, .28);
+  z-index: 25;
+  backdrop-filter: blur(2px);
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  padding: 36px 40px 96px;
+  max-width: 880px;
+}
+.day-chips {
+  display: none;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 14px;
+  margin: 0 0 8px;
+  -webkit-overflow-scrolling: touch;
+}
+.day-chips button {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: .18s var(--ease);
+}
+.day-chips button.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.hero { margin-bottom: 28px; }
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.hero h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.05rem);
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.hero .sub {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  max-width: 52ch;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  align-items: center;
+}
+.btn {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 550;
+  transition: transform .12s, background .18s, border-color .18s, box-shadow .18s;
+  box-shadow: var(--shadow-sm);
+}
+.btn:hover { background: var(--bg-elevated); }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.btn.primary:hover { background: #292524; }
+.btn.ghost {
+  box-shadow: none;
+  background: transparent;
+  border-color: transparent;
+  color: var(--muted);
+}
+.btn.ghost:hover { color: var(--ink); background: rgba(255,255,255,.5); }
+
+.tip-banner {
+  background: var(--accent-soft);
+  border: 1px solid #fed7aa;
+  color: var(--accent-deep);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.symbol {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 26px 22px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.symbol-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.symbol-ipa {
+  font-family: var(--font-ipa);
+  font-size: clamp(1.85rem, 3.5vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0;
+}
+.symbol-name {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-weight: 550;
+}
+.ame-pill {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border: 1px solid #fed7aa;
+  border-radius: 999px;
+  padding: 5px 10px;
+  white-space: nowrap;
+  margin-top: 6px;
+}
+.variants {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.variants b { color: var(--ink-soft); font-weight: 600; }
+.symbol-tip {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+  max-width: 62ch;
+}
+.words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.word-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 8px 6px 14px;
+  transition: border-color .18s, background .18s, box-shadow .18s;
+  max-width: 100%;
+}
+.word-chip:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-elevated);
+}
+.word-chip.playing {
+  border-color: #fdba74;
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px var(--accent-ring);
+}
+.word-chip.no-audio { opacity: 0.85; }
+.word-meta { min-width: 0; display: flex; flex-direction: column; gap: 0; line-height: 1.25; padding: 2px 0; }
+.word-meta .w {
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.word-meta .ipa {
+  font-family: var(--font-ipa);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.play {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ink);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform .12s, background .18s;
+  padding: 0;
+}
+.play:hover { background: var(--accent-deep); }
+.play:active { transform: scale(0.94); }
+.play:disabled { background: var(--faint); cursor: not-allowed; }
+.play svg { width: 14px; height: 14px; display: block; }
+.play .wave {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.play .wave i {
+  width: 2px;
+  background: #fff;
+  border-radius: 1px;
+  animation: wave 0.8s ease-in-out infinite;
+}
+.play .wave i:nth-child(1) { height: 5px; animation-delay: 0s; }
+.play .wave i:nth-child(2) { height: 10px; animation-delay: .15s; }
+.play .wave i:nth-child(3) { height: 7px; animation-delay: .3s; }
+.word-chip.playing .play .icon-play { display: none; }
+.word-chip.playing .play .wave { display: inline-flex; }
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.55); }
+  50% { transform: scaleY(1); }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 26px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+.panel h3 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+.panel p { margin: 0 0 10px; color: var(--muted); }
+.panel ul { margin: 8px 0 0; padding-left: 1.15em; color: var(--muted); }
+.panel li { margin-bottom: 6px; }
+.goals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.goals div {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+.goals strong { display: block; color: var(--ink); margin-bottom: 2px; font-size: 0.82rem; }
+
+.quiz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.quiz-card .q-num {
+  font-size: 0.75rem;
+  color: var(--faint);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.quiz-card .prompt {
+  font-size: 1.02rem;
+  font-weight: 550;
+  margin: 0 0 14px;
+  letter-spacing: -0.015em;
+}
+.quiz-listen {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.options { display: grid; gap: 8px; }
+.opt {
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  color: var(--ink);
+  transition: .15s var(--ease);
+  font-size: 0.95rem;
+}
+.opt:hover:not(:disabled) { border-color: var(--border-strong); background: var(--bg-elevated); }
+.opt.correct {
+  background: var(--success-soft);
+  border-color: #a3b86c;
+  color: var(--success);
+}
+.opt.wrong {
+  background: var(--danger-soft);
+  border-color: #fca5a5;
+  color: var(--danger);
+}
+.opt:disabled { cursor: default; }
+.quiz-score {
+  margin-top: 8px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+.quiz-score b { color: var(--ink); }
+
+.section-label {
+  margin: 28px 0 12px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 650;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.mark-done {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.mark-done input { accent-color: var(--accent); width: 16px; height: 16px; }
+
+.hidden { display: none !important; }
+
+@media (max-width: 860px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    transform: translateX(-105%);
+    transition: transform .28s var(--ease);
+    box-shadow: var(--shadow);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .menu-toggle { display: inline-flex; }
+  .overlay.show { display: block; }
+  .main { padding: 64px 18px 80px; }
+  .day-chips { display: flex; }
+  .symbol { padding: 20px 18px 18px; }
+  .symbol-head { flex-direction: column; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<button class="menu-toggle" id="menuToggle" aria-label="打开目录">目录</button>
+<div class="overlay" id="overlay"></div>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <p class="brand-kicker">Roots &amp; Affixes</p>
+      <h1>词根词缀课程</h1>
+      <p>十二天高频语素<br>真人发音 · 页内播放</p>
+    </div>
+    <nav id="nav"></nav>
+    <div class="progress-wrap">
+      <div class="row"><span>学习进度</span><b id="progressText">0 / 12</b></div>
+      <div class="bar"><i id="progressBar"></i></div>
+    </div>
+    <p class="sidebar-note">音频已打包在本地，点击播放即可听到真人发音，无需跳转页面。进度保存在本机浏览器（localStorage）。</p>
+  </aside>
+
+  <main class="main">
+    <div class="day-chips" id="dayChips"></div>
+    <div id="view"></div>
+  </main>
+</div>
+
+<audio id="player" preload="none"></audio>
+
+<script>
+const DAYS = {"day1":{"title":"Day 1 · 常用前缀 I","subtitle":"re- · pre- · con-/com-","symbols":[{"form":"re-","variants":"re-","name":"再、又；回、向后 · again / back","tip":"课本里常译「再/重新」。拆词：看词首 re-，且去掉后仍是完整词根（如 construct→reconstruct）。注意 receive 的 re- 已固化，不必硬拆。","kind":"前缀","source":"Iowa/UEfAP","words":[{"w":"rebuild"},{"w":"replay"},{"w":"rewrite"}]},{"form":"pre-","variants":"pre-","name":"在…之前、预先 · before","tip":"课本：前缀「预先」。拆词：pre- + 词干，如 view→preview、dict→predict。科技文里常见 preprocess、prefix。","kind":"前缀","source":"Iowa/UEfAP","words":[{"w":"preview"},{"w":"prefix"},{"w":"preprocess"}]},{"form":"con-/com-","variants":"con- / com- / col- / cor-","name":"共同、一起 · with / together","tip":"课本：表「共同」。拆词：b/p/m 前常写作 com-（combine、compile）；l 前 col-；r 前 cor-。connect = con + nect（绑在一起）。","kind":"前缀","source":"Iowa/UEfAP","words":[{"w":"complete"},{"w":"compile"},{"w":"combine"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 re- 的意思是？","options":["again / back","with / together","before","not"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “preview” 中的词缀/词根意思最接近？","speak":"preview","options":["again / back","before","not","with / together"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 con-/com-？","options":["invalid","complete","impossible","irregular"],"answer":1},{"type":"decode","prompt":"拆词：“rewrite” 字面最接近？","speak":"rewrite","options":["write again","write before","write together","not write"],"answer":0},{"type":"root-meaning-zh","prompt":"pre- 的中文意思是？","options":["共同、一起","分开；不、否定","在下、次级、子…","在…之前、预先"],"answer":3}]},"day2":{"title":"Day 2 · 常用前缀 II","subtitle":"in- · de- · dis-","symbols":[{"form":"in-/im-/il-/ir-","variants":"in- / im- / il- / ir-","name":"不、非 · not","tip":"课本：否定前缀。拆词：p/b/m 前用 im-（impossible）；l 前 il-；r 前 ir-。勿与 in-「进入」（input、insert）混淆——看后面是否已是完整否定对象。","kind":"前缀","source":"Iowa/UEfAP","words":[{"w":"invalid"},{"w":"impossible"},{"w":"irregular"}]},{"form":"de-","variants":"de-","name":"去掉、向下、相反 · away / down / reverse","tip":"课本：表「除去/降低」。拆词：debug = 去掉 bug；decode = 解开编码；decrease = 向下减少。科技里 de- 极高频。","kind":"前缀","source":"Iowa/UEfAP/tech","words":[{"w":"debug"},{"w":"decode"},{"w":"deploy"}]},{"form":"dis-","variants":"dis-","name":"分开；不、否定 · apart / not","tip":"课本：否定或「分离」。拆词：disable、disconnect、distribute（dis+tribute 分开给）。比 un- 更偏正式/学术。","kind":"前缀","source":"Iowa/UEfAP","words":[{"w":"disable"},{"w":"disconnect"},{"w":"distribute"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 in-/im-/il-/ir- 的意思是？","options":["not","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “debug” 中的词缀/词根意思最接近？","speak":"debug","options":["again / back","away / down / reverse","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 dis-？","options":["rebuild","disable","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“decode” 字面最接近？","speak":"decode","options":["remove / reverse the code","code again","code together","code forward"],"answer":0},{"type":"root-meaning-zh","prompt":"de- 的中文意思是？","options":["共同、一起","向外、出；前…","在…之间、相互","去掉、向下、相反"],"answer":3}]},"day3":{"title":"Day 3 · 常用前缀 III","subtitle":"ex- · pro- · sub-","symbols":[{"form":"ex-","variants":"ex- / e- / ef-","name":"向外、出；前… · out / former","tip":"课本：表「出/外」。拆词：export = 运出；extract = 抽出；exclude = 排除在外。词首 e-/ef- 有时是同一来源（emit、effect）。","kind":"前缀","source":"Iowa/UEfAP","words":[{"w":"export"},{"w":"extract"},{"w":"exclude"}]},{"form":"pro-","variants":"pro-","name":"向前；支持、代替 · forward / for","tip":"课本：表「向前/亲」。拆词：progress = 向前走；promote = 向前推；process = 向前推进的过程。程序里 process/procedure 同源思路。","kind":"前缀","source":"Iowa/UEfAP/tech","words":[{"w":"process"},{"w":"progress"},{"w":"promote"}]},{"form":"sub-","variants":"sub- / suc- / suf- / sug-","name":"在下、次级、子… · under / below","tip":"课本：表「在下/次」。拆词：subnet、subdirectory、subscribe（在下面签名）。科技里 sub- 常表示层级：subprocess、subnet。","kind":"前缀","source":"Iowa/UEfAP/tech","words":[{"w":"subsequent"},{"w":"subscribe"},{"w":"submit"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 ex- 的意思是？","options":["out / former","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “process” 中的词缀/词根意思最接近？","speak":"process","options":["again / back","forward / for","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 sub-？","options":["rebuild","subsequent","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“export” 字面最接近？","speak":"export","options":["carry / send out","carry in","carry under","carry between"],"answer":0},{"type":"root-meaning-zh","prompt":"pro- 的中文意思是？","options":["不、非","向外、出；前…","跨越、转移、透过","向前；支持、代替"],"answer":3}]},"day4":{"title":"Day 4 · 常用前缀 IV","subtitle":"inter- · trans- · un-","symbols":[{"form":"inter-","variants":"inter-","name":"在…之间、相互 · between / among","tip":"课本：表「互相/之间」。拆词：interface = 两者之间的面；internet = 网络之间；interrupt = 插入中间打断。","kind":"前缀","source":"Iowa/UEfAP/tech","words":[{"w":"interface"},{"w":"internet"},{"w":"interrupt"}]},{"form":"trans-","variants":"trans-","name":"跨越、转移、透过 · across / beyond","tip":"课本：表「横过/转变」。拆词：transmit = 送过去；transfer = 搬运过去；transform = 改变形态。协议名 HTTP 里的 transfer 同根。","kind":"前缀","source":"Iowa/UEfAP/tech","words":[{"w":"transmit"},{"w":"transfer"},{"w":"transform"}]},{"form":"un-","variants":"un-","name":"不；解开、相反动作 · not / reverse","tip":"课本：最常见否定前缀。拆词：可加在形容词（unsafe）或动词上表反向（undo、unzip）。口语/通用语里比 in-/dis- 更常见。","kind":"前缀","source":"Iowa/Lane2019","words":[{"w":"undo"},{"w":"unsafe"},{"w":"unzip"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 inter- 的意思是？","options":["between / among","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “transmit” 中的词缀/词根意思最接近？","speak":"transmit","options":["again / back","across / beyond","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 un-？","options":["rebuild","undo","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“transmit” 字面最接近？","speak":"transmit","options":["send across","send back","send under","not send"],"answer":0},{"type":"root-meaning-zh","prompt":"trans- 的中文意思是？","options":["去掉、向下、相反","向前；支持、代替","不；解开、相反动作","跨越、转移、透过"],"answer":3}]},"day5":{"title":"Day 5 · 高频后缀","subtitle":"-tion · -ment · -able","symbols":[{"form":"-tion/-ation","variants":"-tion / -ation / -sion","name":"行为、状态、结果（名词后缀） · act / state / result","tip":"课本：动词→抽象名词。拆词：locate→location；apply→application；decide→decision（-sion）。论文里 -tion 词密度极高。","kind":"后缀","source":"Iowa/UEfAP","words":[{"w":"application"},{"w":"function"},{"w":"location"}]},{"form":"-ment","variants":"-ment","name":"结果、手段、状态（名词后缀） · result / means","tip":"课本：动词→名词。拆词：develop→development；argue→argument；deploy→deployment。看词尾 -ment 即可锁定名词。","kind":"后缀","source":"Iowa/UEfAP","words":[{"w":"development"},{"w":"argument"},{"w":"deployment"}]},{"form":"-able/-ible","variants":"-able / -ible","name":"可…的、能被…的 · can be / worthy of","tip":"课本：形容词「能够被」。拆词：read→readable；access→accessible；flex→flexible。可用性/权限文档里 readable、writable 极常见。","kind":"后缀","source":"Iowa/UEfAP","words":[{"w":"readable"},{"w":"accessible"},{"w":"flexible"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 -tion/-ation 的意思是？","options":["act / state / result","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “development” 中的词缀/词根意思最接近？","speak":"development","options":["again / back","result / means","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 -able/-ible？","options":["rebuild","readable","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“readable” 字面最接近？","speak":"readable","options":["can be read","act of reading","one who reads","not reading"],"answer":0},{"type":"root-meaning-zh","prompt":"-ment 的中文意思是？","options":["分开；不、否定","在下、次级、子…","不；解开、相反动作","结果、手段、状态（名词后缀）"],"answer":3}]},"day6":{"title":"Day 6 · 拉丁词根 I","subtitle":"struct · duc/duct · fac","symbols":[{"form":"struct","variants":"struct / stru","name":"建造、构筑 · build","tip":"课本：词根「建」。拆词：structure、construct、infrastructure（infra 在下 + struct）。读架构文档时抓住 struct = 搭起来的东西。","kind":"拉丁词根","source":"Iowa/tech","words":[{"w":"structure"},{"w":"instruction"},{"w":"infrastructure"}]},{"form":"duc/duct","variants":"duc / duct / duce","name":"引导、带领 · lead","tip":"课本：词根「引导」。拆词：conduct = 引导一起；produce = 向前引出；reduce = 向回引（减少）。introduce、pipeline 语境里也常出现。","kind":"拉丁词根","source":"Iowa/UEfAP","words":[{"w":"produce"},{"w":"reduce"},{"w":"introduce"}]},{"form":"fac/fect/fic","variants":"fac / fect / fic / fy","name":"做、制作 · make / do","tip":"课本：词根「做」。拆词：factory、affect（对…起作用）、efficient（做得有效）、simplify（-fy = 使成为）。effect / affect 都含 fect。","kind":"拉丁词根","source":"Iowa/UEfAP","words":[{"w":"factory"},{"w":"affect"},{"w":"efficient"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 struct 的意思是？","options":["build","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “produce” 中的词缀/词根意思最接近？","speak":"produce","options":["again / back","lead","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 fac/fect/fic？","options":["rebuild","factory","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“infrastructure” 字面最接近？","speak":"infrastructure","options":["the underlying built structure","a written structure","a small structure","a far structure"],"answer":0},{"type":"root-meaning-zh","prompt":"duc/duct 的中文意思是？","options":["向外、出；前…","在…之间、相互","行为、状态、结果（名词后缀）","引导、带领"],"answer":3}]},"day7":{"title":"Day 7 · 拉丁词根 II","subtitle":"port · form · scrib","symbols":[{"form":"port","variants":"port","name":"搬运、携带 · carry","tip":"课本：词根「运/带」。拆词：transport、export、import、portable、support（从下面托住）。网络 port 本义也是「口岸/通道」。","kind":"拉丁词根","source":"Iowa/tech","words":[{"w":"port"},{"w":"export"},{"w":"support"}]},{"form":"form","variants":"form","name":"形状、形态 · shape","tip":"课本：词根「形」。拆词：format、transform、inform（赋以形态/信息）、reform。表单 form、格式 format 同源。","kind":"拉丁词根","source":"Iowa/tech","words":[{"w":"format"},{"w":"transform"},{"w":"inform"}]},{"form":"scrib/script","variants":"scrib / script / scribe","name":"写 · write","tip":"课本：词根「写」。拆词：describe、script、subscription、manuscript。代码里 script、typescript、description 都挂此根。","kind":"拉丁词根","source":"Iowa/tech","words":[{"w":"describe"},{"w":"script"},{"w":"subscribe"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 port 的意思是？","options":["carry","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “format” 中的词缀/词根意思最接近？","speak":"format","options":["again / back","shape","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 scrib/script？","options":["rebuild","describe","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“transport” 字面最接近？","speak":null,"options":["carry across","carry back","not carry","carry under"],"answer":0},{"type":"root-meaning-zh","prompt":"form 的中文意思是？","options":["向前；支持、代替","跨越、转移、透过","结果、手段、状态（名词后缀）","形状、形态"],"answer":3}]},"day8":{"title":"Day 8 · 拉丁词根 III","subtitle":"spect · mit/miss · ject","symbols":[{"form":"spect/spec","variants":"spect / spec / spic","name":"看、观察 · look / see","tip":"课本：词根「看」。拆词：inspect、perspective、specify（看清楚而明确）、aspect。spectator、spectrum 同族。","kind":"拉丁词根","source":"Iowa/UEfAP","words":[{"w":"inspect"},{"w":"specify"},{"w":"aspect"}]},{"form":"mit/miss","variants":"mit / miss / mise","name":"送出、派遣 · send","tip":"课本：词根「送」。拆词：transmit、mission、message、permit、submit。dismiss = 送走；emit = 发出。","kind":"拉丁词根","source":"Iowa/UEfAP","words":[{"w":"transmit"},{"w":"submit"},{"w":"message"}]},{"form":"ject","variants":"ject","name":"投、掷 · throw","tip":"课本：词根「投掷」。拆词：object（扔到对面→对象）、reject、inject、project（向前投）。编程 object / injection 都好记。","kind":"拉丁词根","source":"Iowa/tech","words":[{"w":"object"},{"w":"reject"},{"w":"inject"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 spect/spec 的意思是？","options":["look / see","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “transmit” 中的词缀/词根意思最接近？","speak":"transmit","options":["again / back","send","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 ject？","options":["rebuild","object","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“reject” 字面最接近？","speak":"reject","options":["throw back","throw forward","throw under","look at"],"answer":0},{"type":"root-meaning-zh","prompt":"mit/miss 的中文意思是？","options":["在下、次级、子…","不；解开、相反动作","可…的、能被…的","送出、派遣"],"answer":3}]},"day9":{"title":"Day 9 · 拉丁词根 IV","subtitle":"cap/cept · pos/pon · fer","symbols":[{"form":"cap/cept/cip","variants":"cap / cept / cip / ceive","name":"拿、取、接受 · take / seize","tip":"课本：词根「取」。拆词：capture、accept、receive、perceive、capacity。concept = 一起抓住的想法。","kind":"拉丁词根","source":"Iowa/UEfAP","words":[{"w":"capture"},{"w":"accept"},{"w":"receive"}]},{"form":"pos/pon","variants":"pos / pon / pose / pound","name":"放置、摆放 · place / put","tip":"课本：词根「放置」。拆词：position、compose、component、deposit、expose。component = 放在一起的部件。","kind":"拉丁词根","source":"Iowa/tech","words":[{"w":"position"},{"w":"component"},{"w":"compose"}]},{"form":"fer","variants":"fer / late","name":"搬运、带来 · carry / bring","tip":"课本：词根「带来」。拆词：transfer、refer、prefer、conference、different（带向不同方向）。与 port 义近但构词不同。","kind":"拉丁词根","source":"Iowa/UEfAP","words":[{"w":"transfer"},{"w":"refer"},{"w":"prefer"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 cap/cept/cip 的意思是？","options":["take / seize","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “position” 中的词缀/词根意思最接近？","speak":"position","options":["again / back","place / put","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 fer？","options":["rebuild","transfer","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“transfer” 字面最接近？","speak":"transfer","options":["carry across / bring over","turn around","write down","send out once"],"answer":0},{"type":"root-meaning-zh","prompt":"pos/pon 的中文意思是？","options":["在…之间、相互","行为、状态、结果（名词后缀）","建造、构筑","放置、摆放"],"answer":3}]},"day10":{"title":"Day 10 · 拉丁+希腊","subtitle":"vert/vers · graph · log","symbols":[{"form":"vert/vers","variants":"vert / vers","name":"转、翻转 · turn","tip":"课本：词根「转」。拆词：convert、reverse、version、vertical、divert。version = 转出来的一个「版本」。","kind":"拉丁词根","source":"Iowa/tech","words":[{"w":"divert"},{"w":"reverse"},{"w":"version"}]},{"form":"graph","variants":"graph / gram","name":"写、绘、图 · write / draw","tip":"课本：希腊词根「写/图」。拆词：graphics、paragraph、diagram、photograph。技术里 graph（图）、telemetry 相关可视化常出现。","kind":"希腊词根","source":"Iowa/tech","words":[{"w":"graphics"},{"w":"paragraph"},{"w":"diagram"}]},{"form":"log/logy","variants":"log / logy / logue","name":"词、话语；学科；逻辑 · word / study / reason","tip":"课本：希腊「言/理/学科」。拆词：logic、catalog、biology、technology（techn+logy）。程序 log 是「记录下来的话」。","kind":"希腊词根","source":"Iowa/tech","words":[{"w":"logic"},{"w":"catalog"},{"w":"technology"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 vert/vers 的意思是？","options":["turn","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “graphics” 中的词缀/词根意思最接近？","speak":"graphics","options":["again / back","write / draw","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 log/logy？","options":["rebuild","logic","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“diagram” 字面最接近？","speak":"diagram","options":["a drawn / written figure","a far sound","a small machine","a self story"],"answer":0},{"type":"root-meaning-zh","prompt":"graph 的中文意思是？","options":["跨越、转移、透过","结果、手段、状态（名词后缀）","引导、带领","写、绘、图"],"answer":3}]},"day11":{"title":"Day 11 · 希腊词根 I","subtitle":"phon · chron · auto","symbols":[{"form":"phon","variants":"phon / phone","name":"声音 · sound","tip":"课本：希腊「声」。拆词：phone、microphone、symphony、phonetic。telephone = tele（远）+ phon（声）。","kind":"希腊词根","source":"Iowa/tech","words":[{"w":"phone"},{"w":"microphone"},{"w":"symphony"}]},{"form":"chron","variants":"chron","name":"时间 · time","tip":"课本：希腊「时」。拆词：chronic、synchronize、chronology、anachronism。分布式里 sync / chronological order 常考。","kind":"希腊词根","source":"Iowa/tech","words":[{"w":"chronic"},{"w":"synchronize"},{"w":"chronology"}]},{"form":"auto","variants":"auto","name":"自己、自动 · self","tip":"课本：希腊「自己」。拆词：automatic、autonomous、autobiography、autoconfig。DevOps 里 auto- scale / auto- deploy 字面即「自己做」。","kind":"希腊词根","source":"Iowa/tech","words":[{"w":"automatic"},{"w":"autonomous"},{"w":"autobiography"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 phon 的意思是？","options":["sound","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “chronic” 中的词缀/词根意思最接近？","speak":"chronic","options":["again / back","time","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 auto？","options":["rebuild","automatic","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“synchronize” 字面最接近？","speak":"synchronize","options":["make happen at the same time","make sound louder","study of life","write from afar"],"answer":0},{"type":"root-meaning-zh","prompt":"chron 的中文意思是？","options":["不；解开、相反动作","可…的、能被…的","做、制作","时间"],"answer":3}]},"day12":{"title":"Day 12 · 希腊词根 II · 复习","subtitle":"micro · tele · techn","symbols":[{"form":"micro","variants":"micro","name":"小、微 · small","tip":"课本：希腊「小」。拆词：microphone、microsoft、microservices、microscope。架构里 microservice = 小服务。","kind":"希腊词根","source":"tech","words":[{"w":"microphone"},{"w":"microwave"},{"w":"microscope"}]},{"form":"tele","variants":"tele","name":"远、远程 · far","tip":"课本：希腊「远」。拆词：telephone、television、telemetry、telecommute。telemetry = 从远处测并传来的数据。","kind":"希腊词根","source":"tech","words":[{"w":"telephone"},{"w":"television"},{"w":"telemetry"}]},{"form":"techn","variants":"techn / techno","name":"技艺、技术 · skill / art","tip":"课本：希腊「技艺」。拆词：technical、technology、technique、polytechnic。读 tech 文档时 techn- 即「怎么做的那套技艺」。","kind":"希腊词根","source":"tech","words":[{"w":"technical"},{"w":"technology"},{"w":"technique"}]}],"quiz":[{"type":"root-meaning","prompt":"词根/词缀 micro 的意思是？","options":["small","before","again / back","with / together"],"answer":0},{"type":"word-root-meaning","prompt":"单词 “telephone” 中的词缀/词根意思最接近？","speak":"telephone","options":["again / back","far","with / together","before"],"answer":1},{"type":"contains-root","prompt":"哪个词含有词根/词缀 techn？","options":["rebuild","technical","replay","rewrite"],"answer":1},{"type":"decode","prompt":"拆词：“autobiography” 字面最接近？","speak":"autobiography","options":["self + life + writing","far + sound + study","small + time + skill","again + build + write"],"answer":0},{"type":"root-meaning-zh","prompt":"tele 的中文意思是？","options":["行为、状态、结果（名词后缀）","建造、构筑","搬运、携带","远、远程"],"answer":3}]}};
+const DAY_ORDER = ["intro","day1","day2","day3","day4","day5","day6","day7","day8","day9","day10","day11","day12","quiz"];
+const DAY_META = {"intro":{"num":"·","title":"导读","short":"来源与用法"},"day1":{"num":"1","title":"常用前缀 I","short":"re- · pre- · con-/com-"},"day2":{"num":"2","title":"常用前缀 II","short":"in- · de- · dis-"},"day3":{"num":"3","title":"常用前缀 III","short":"ex- · pro- · sub-"},"day4":{"num":"4","title":"常用前缀 IV","short":"inter- · trans- · un-"},"day5":{"num":"5","title":"高频后缀","short":"-tion · -ment · -able"},"day6":{"num":"6","title":"拉丁词根 I","short":"struct · duc/duct · fac"},"day7":{"num":"7","title":"拉丁词根 II","short":"port · form · scrib"},"day8":{"num":"8","title":"拉丁词根 III","short":"spect · mit/miss · ject"},"day9":{"num":"9","title":"拉丁词根 IV","short":"cap/cept · pos/pon · fer"},"day10":{"num":"10","title":"拉丁+希腊","short":"vert/vers · graph · log"},"day11":{"num":"11","title":"希腊词根 I","short":"phon · chron · auto"},"day12":{"num":"12","title":"希腊词根 II · 复习","short":"micro · tele · techn"},"quiz":{"num":"✓","title":"总测验","short":"拆词巩固"}};
+const FINAL_QUIZ = [{"type":"decode","prompt":"拆词：“reconstruct” 字面最接近？","speak":"reconstruct","options":["build again","build under","send across","write far"],"answer":0},{"type":"decode","prompt":"拆词：“transmission” 字面最接近？","speak":"transmission","options":["the act of sending across","looking carefully","self writing","turning back"],"answer":0},{"type":"decode","prompt":"拆词：“autobiography” 字面最接近？","speak":"autobiography","options":["self + life + writing","far + sound","small + study","again + build"],"answer":0},{"type":"root-meaning","prompt":"词根 struct 的意思是？","options":["build","send","throw","turn"],"answer":0},{"type":"contains-root","prompt":"哪个词含有 trans-（across）？","options":["submit","transfer","rebuild","unsafe"],"answer":1},{"type":"word-root-meaning","prompt":"“inspect” 中的 spect 意思最接近？","speak":"inspect","options":["look / see","send","carry","write"],"answer":0},{"type":"root-meaning","prompt":"前缀 inter- 的意思是？","options":["between / among","under","again","out"],"answer":0},{"type":"decode","prompt":"拆词：“microphone” 字面最接近？","speak":"microphone","options":["small + sound","far + sound","self + sound","time + sound"],"answer":0},{"type":"contains-root","prompt":"哪个词含有 -able（can be）？","options":["deployment","readable","structure","progress"],"answer":1},{"type":"root-meaning-zh","prompt":"词根 ject 的中文意思是？","options":["投、掷","引导","建造","声音"],"answer":0}];
+
+const STORAGE_KEY = "roots-course-progress-v1";
+const player = document.getElementById("player");
+let currentView = "intro";
+let playingChip = null;
+const AUDIO_MISSING = new Set();
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function audioPath(word) {
+  const w = String(word).trim().toLowerCase().replace(/\s+/g, "-");
+  if (!w) return null;
+  if (/^[a-z0-9-]+$/.test(w)) return `audio/${w}.mp3`;
+  return null;
+}
+
+function stopAudio() {
+  player.pause();
+  player.removeAttribute("src");
+  player.load();
+  if (playingChip) {
+    playingChip.classList.remove("playing");
+    playingChip = null;
+  }
+}
+
+function playQueue(urls, chip) {
+  stopAudio();
+  if (!urls.length) return;
+  playingChip = chip;
+  if (chip) chip.classList.add("playing");
+  let i = 0;
+  const next = () => {
+    if (i >= urls.length) {
+      if (chip) chip.classList.remove("playing");
+      playingChip = null;
+      return;
+    }
+    player.src = urls[i++];
+    player.play().catch(() => next());
+  };
+  player.onended = next;
+  player.onerror = () => {
+    const failed = player.src;
+    const m = failed && failed.match(/audio\/([^/]+)\.mp3/);
+    if (m) AUDIO_MISSING.add(m[1]);
+    next();
+  };
+  next();
+}
+
+function playWord(wordOrText, chip) {
+  const p = audioPath(wordOrText);
+  if (!p) return;
+  playQueue([p], chip);
+}
+
+function playIcon() {
+  return `<span class="icon-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11-6.86a1 1 0 0 0 0-1.72l-11-6.86a1 1 0 0 0-1.5.86z"/></svg></span><span class="wave" aria-hidden="true"><i></i><i></i><i></i></span>`;
+}
+
+function renderWordChip(item) {
+  const label = item.w;
+  return `<div class="word-chip" data-word="${esc(label)}">
+    <div class="word-meta">
+      <span class="w">${esc(label)}</span>
+    </div>
+    <button type="button" class="play" data-play="${esc(label)}" aria-label="播放 ${esc(label)}">${playIcon()}</button>
+  </div>`;
+}
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+  catch { return {}; }
+}
+function saveProgress(p) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+function updateProgressUI() {
+  const p = loadProgress();
+  const dayKeys = ["day1","day2","day3","day4","day5","day6","day7","day8","day9","day10","day11","day12"];
+  const done = dayKeys.filter(d => p[d]).length;
+  document.getElementById("progressText").textContent = `${done} / 12`;
+  document.getElementById("progressBar").style.width = `${(done/12)*100}%`;
+  document.querySelectorAll(".nav-btn[data-view]").forEach(btn => {
+    const v = btn.dataset.view;
+    btn.classList.toggle("done", !!p[v]);
+    btn.classList.toggle("active", v === currentView);
+  });
+  document.querySelectorAll("#dayChips button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.view === currentView);
+  });
+}
+
+function renderNav() {
+  const nav = document.getElementById("nav");
+  const chips = document.getElementById("dayChips");
+  nav.innerHTML = "";
+  chips.innerHTML = "";
+  for (const key of DAY_ORDER) {
+    const m = DAY_META[key];
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "nav-btn";
+    btn.dataset.view = key;
+    btn.innerHTML = `<span class="num">${m.num}</span><span class="label"><strong>${esc(m.title)}</strong><span>${esc(m.short)}</span></span>`;
+    btn.addEventListener("click", () => { showView(key); closeMenu(); });
+    nav.appendChild(btn);
+
+    if (key.startsWith("day")) {
+      const c = document.createElement("button");
+      c.type = "button";
+      c.dataset.view = key;
+      c.textContent = `Day ${m.num}`;
+      c.addEventListener("click", () => showView(key));
+      chips.appendChild(c);
+    }
+  }
+}
+
+function renderIntro() {
+  return `
+  <div class="hero">
+    <div class="eyebrow">12-Day Path · ~10 min/day</div>
+    <h2>用十二天把高频词根词缀拆清楚</h2>
+    <p class="sub">面向学术英语与 SDE 技术阅读。每个语素配中英释义、例词真人发音，以及「课本 vs 拆词」小提示。进度保存在本机。</p>
+    <div class="hero-actions">
+      <button class="btn primary" data-go="day1">开始 Day 1</button>
+      <button class="btn ghost" data-go="day12">先看 Day 12 复习</button>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>材料来源（Sources）</h3>
+    <ul>
+      <li><b>Lane et al. 2019</b> — 高频词素教学研究与实践取向</li>
+      <li><b>Iowa Reading Research Center</b> — High-Frequency Morphemes 清单</li>
+      <li><b>UEfAP</b> — 学术英语常见前后缀</li>
+      <li><b>Tech / CS 倾斜</b> — 在上述清单上优先选取编程、网络、系统文档中高频出现的拉丁/希腊词根（如 struct、mit/miss、graph、tele）</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h3>这门课怎么用</h3>
+    <ul>
+      <li><b>看</b>：先看语素形式与变体（如 con-/com-/col-），记住核心义。</li>
+      <li><b>听</b>：点例词旁圆形播放键，听真人美式发音（本地 mp3）。</li>
+      <li><b>拆</b>：读「课本 vs 拆词」提示，学会在生词里定位语素。</li>
+      <li><b>练</b>：每天 4–5 道小测；Day 12 与总测验侧重复合词解码。</li>
+      <li><b>叠</b>：可与口语/音标计划并行，每天约 10 分钟。</li>
+    </ul>
+    <div class="goals">
+      <div><strong>Day 1–4</strong>高频前缀：re/pre/con、否定、ex/pro/sub、inter/trans/un</div>
+      <div><strong>Day 5</strong>名词/形容词后缀：-tion、-ment、-able/-ible</div>
+      <div><strong>Day 6–9</strong>拉丁词根：struct、duct、port、ject…</div>
+      <div><strong>Day 10–12</strong>希腊词根 + 复合词拆解复习</div>
+    </div>
+  </div>
+  <div class="tip-banner">提示：部署到 GitHub Pages 时，将本页作为 <b>index.html</b>，与 <b>audio/</b> 文件夹放在同一目录（或解压 roots-course.zip 到 Hexo <b>source/roots/</b>）。用浏览器直接打开即可离线学习；进度仅存于本机，不会上传。</div>
+  `;
+}
+
+function renderDay(key) {
+  const day = DAYS[key];
+  if (!day) return `<p>未找到课程。</p>`;
+  const p = loadProgress();
+  const symbols = (day.symbols || []).map(sym => `
+    <article class="symbol">
+      <div class="symbol-head">
+        <div>
+          <h3 class="symbol-ipa">${esc(sym.form)}</h3>
+          <p class="symbol-name">${esc(sym.name)}</p>
+        </div>
+        <span class="ame-pill">${esc(sym.kind)}</span>
+      </div>
+      <p class="variants"><b>变体</b> · ${esc(sym.variants)}</p>
+      <p class="symbol-tip">${esc(sym.tip)}</p>
+      <div class="words">${(sym.words || []).map(renderWordChip).join("")}</div>
+    </article>
+  `).join("");
+
+  const quizHtml = renderQuizBlock(day.quiz || [], key);
+
+  return `
+  <div class="hero">
+    <div class="eyebrow">Day ${DAY_META[key].num}</div>
+    <h2>${esc(day.title.replace(/^Day \d+ · /, ""))}</h2>
+    <p class="sub">${esc(day.subtitle)}</p>
+    <div class="hero-actions">
+      <button class="btn primary" id="playAllBtn">顺序播放本课例词</button>
+      <button class="btn" id="stopBtn">停止</button>
+    </div>
+    <label class="mark-done"><input type="checkbox" id="markDone" ${p[key] ? "checked" : ""}/> 标记本日已完成</label>
+  </div>
+  <div class="section-label">语素卡片</div>
+  ${symbols}
+  <div class="section-label">本日小测</div>
+  ${quizHtml}
+  <div class="footer-nav">
+    <button class="btn ghost" data-go="${prevKey(key)}">← 上一节</button>
+    <button class="btn primary" data-go="${nextKey(key)}">下一节 →</button>
+  </div>
+  `;
+}
+
+function prevKey(key) {
+  const i = DAY_ORDER.indexOf(key);
+  return DAY_ORDER[Math.max(0, i - 1)];
+}
+function nextKey(key) {
+  const i = DAY_ORDER.indexOf(key);
+  return DAY_ORDER[Math.min(DAY_ORDER.length - 1, i + 1)];
+}
+
+function renderQuizBlock(quiz, dayKey) {
+  if (!quiz.length) return `<div class="panel"><p>本日无测验。</p></div>`;
+  const items = quiz.map((q, i) => {
+    const listenBtn = q.speak ? `
+      <div class="quiz-listen">
+        <button type="button" class="btn" data-play="${esc(q.speak)}" aria-label="听 ${esc(q.speak)}">▶ 听发音</button>
+      </div>` : "";
+    const opts = q.options.map((opt, oi) =>
+      `<button type="button" class="opt" data-quiz="${esc(dayKey)}" data-qi="${i}" data-oi="${oi}">${esc(opt)}</button>`
+    ).join("");
+    return `<div class="quiz-card" data-answer="${q.answer}">
+      <div class="q-num">Question ${i + 1}</div>
+      <p class="prompt">${esc(q.prompt)}</p>
+      ${listenBtn}
+      <div class="options">${opts}</div>
+    </div>`;
+  }).join("");
+  return `${items}<div class="quiz-score" id="quizScore-${esc(dayKey)}">作答后显示得分</div>`;
+}
+
+function renderFinalQuiz() {
+  return `
+  <div class="hero">
+    <div class="eyebrow">Review</div>
+    <h2>总测验 · 拆词巩固</h2>
+    <p class="sub">综合十二天语素。优先练习复合词解码（reconstruct、transmission、autobiography）。</p>
+  </div>
+  ${renderQuizBlock(FINAL_QUIZ, "final")}
+  <div class="footer-nav">
+    <button class="btn ghost" data-go="day12">← 返回 Day 12</button>
+    <button class="btn primary" data-go="intro">回到导读</button>
+  </div>`;
+}
+
+function showView(key) {
+  currentView = key;
+  stopAudio();
+  const view = document.getElementById("view");
+  if (key === "intro") view.innerHTML = renderIntro();
+  else if (key === "quiz") view.innerHTML = renderFinalQuiz();
+  else view.innerHTML = renderDay(key);
+  bindViewEvents();
+  updateProgressUI();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function bindViewEvents() {
+  const view = document.getElementById("view");
+  view.querySelectorAll("[data-go]").forEach(el => {
+    el.addEventListener("click", () => showView(el.dataset.go));
+  });
+  view.querySelectorAll("[data-play]").forEach(el => {
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const chip = el.closest(".word-chip") || el;
+      playWord(el.dataset.play, chip.classList && chip.classList.contains("word-chip") ? chip : null);
+    });
+  });
+  const mark = document.getElementById("markDone");
+  if (mark) {
+    mark.addEventListener("change", () => {
+      const p = loadProgress();
+      p[currentView] = mark.checked;
+      saveProgress(p);
+      updateProgressUI();
+    });
+  }
+  const stopBtn = document.getElementById("stopBtn");
+  if (stopBtn) stopBtn.addEventListener("click", stopAudio);
+  const playAll = document.getElementById("playAllBtn");
+  if (playAll) playAll.addEventListener("click", () => playAllDay(currentView));
+
+  view.querySelectorAll(".opt").forEach(btn => {
+    btn.addEventListener("click", () => onQuizAnswer(btn));
+  });
+}
+
+function playAllDay(key) {
+  const day = DAYS[key];
+  if (!day) return;
+  const urls = [];
+  for (const sym of day.symbols || []) {
+    for (const w of sym.words || []) {
+      const p = audioPath(w.w);
+      if (p) urls.push(p);
+    }
+  }
+  const uniq = [];
+  for (const u of urls) if (uniq[uniq.length-1] !== u) uniq.push(u);
+  playQueue(uniq, null);
+}
+
+function onQuizAnswer(btn) {
+  const card = btn.closest(".quiz-card");
+  if (!card || card.dataset.locked) return;
+  const answer = Number(card.dataset.answer);
+  const oi = Number(btn.dataset.oi);
+  const opts = [...card.querySelectorAll(".opt")];
+  opts.forEach((o, idx) => {
+    o.disabled = true;
+    if (idx === answer) o.classList.add("correct");
+    if (idx === oi && oi !== answer) o.classList.add("wrong");
+  });
+  card.dataset.locked = "1";
+  card.dataset.correct = oi === answer ? "1" : "0";
+  const quizId = btn.dataset.quiz;
+  const cards = [...document.querySelectorAll(`.opt[data-quiz="${quizId}"]`)].map(o => o.closest(".quiz-card"));
+  const unique = [...new Set(cards)];
+  const answered = unique.filter(c => c.dataset.locked);
+  const correct = unique.filter(c => c.dataset.correct === "1").length;
+  const box = document.getElementById(`quizScore-${quizId}`);
+  if (box) box.innerHTML = `已答 <b>${answered.length}</b> / ${unique.length}，正确 <b>${correct}</b>`;
+}
+
+function closeMenu() {
+  document.getElementById("sidebar").classList.remove("open");
+  document.getElementById("overlay").classList.remove("show");
+}
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("sidebar").classList.add("open");
+  document.getElementById("overlay").classList.add("show");
+});
+document.getElementById("overlay").addEventListener("click", closeMenu);
+
+renderNav();
+showView("intro");
+updateProgressUI();
+</script>
+</body>
+</html>
